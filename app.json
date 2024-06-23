@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Panting React Native Template",
-    "slug": "panting-react-native-template",
-    "scheme": "panting-scheme",
+    "name": "In Your Voices",
+    "slug": "in-your-voices",
+    "scheme": "voices-scheme",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

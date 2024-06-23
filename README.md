@@ -1,6 +1,10 @@
-# Panting React Native Template
+# In Your Voices
 
-This a template repo for testing out React Native development for IOS.
+An IOS app that helps you teach your child with your voices.
+
+## Disclaimer
+
+This app was built to help one family. Its author is a software developer and not a child educator.
 
 ## Maintainers
 
