@@ -1,6 +1,7 @@
 # In Your Voices
 
 An IOS app that helps you teach your child with your voices.
+[Documentation](https://willtp87.github.io/in-your-voices/)
 
 ## Disclaimer
 
