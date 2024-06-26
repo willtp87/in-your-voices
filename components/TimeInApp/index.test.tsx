@@ -1,4 +1,3 @@
-//import { screen, act } from "@testing-library/react";
 import { render, screen, act } from "@testing-library/react-native";
 import React from "react";
 import { Provider } from "react-redux";
