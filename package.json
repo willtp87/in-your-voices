@@ -19,7 +19,7 @@
     "expo-linking": "~6.3.1",
     "expo-localization": "^15.0.3",
     "expo-modules-autolinking": "^1.11.1",
-    "expo-modules-core": "^1.12.9",
+    "expo-modules-core": "^1.12.18",
     "expo-router": "~3.5.17",
     "expo-status-bar": "~1.12.1",
     "i18next": "^23.11.4",
