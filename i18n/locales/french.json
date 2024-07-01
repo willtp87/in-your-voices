@@ -1,3 +1,4 @@
 {
-    "helloWorld": "Dans tes voix!"
+    "mainTitle": "Dans tes voix!",
+    "timeInApp": "Temps passé dans l'application: {{timeInApp}}"
 }

@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 
 import TimeInApp from ".";
 import { store } from "../../store";
+
 describe("<TimeInApp />", () => {
   it("increments the timer each second", () => {
     render(
@@ -11,27 +12,27 @@ describe("<TimeInApp />", () => {
         <TimeInApp />
       </Provider>,
     );
-    expect(screen.queryByText("0")).toBeTruthy();
+    expect(screen.getByText("0", { exact: false })).toBeTruthy();
 
     act(() => {
       jest.advanceTimersByTime(1000);
     });
-    expect(screen.queryByText("1")).toBeTruthy();
+    expect(screen.getByText("1", { exact: false })).toBeTruthy();
 
     act(() => {
       jest.advanceTimersByTime(1000);
     });
-    expect(screen.queryByText("2")).toBeTruthy();
+    expect(screen.getByText("2", { exact: false })).toBeTruthy();
 
     act(() => {
       jest.advanceTimersByTime(500);
     });
-    expect(screen.queryByText("2")).toBeTruthy();
+    expect(screen.getByText("2", { exact: false })).toBeTruthy();
 
     act(() => {
       jest.advanceTimersByTime(500);
     });
-    expect(screen.queryByText("3")).toBeTruthy();
+    expect(screen.getByText("3", { exact: false })).toBeTruthy();
   });
 
   it("clears the interval when the component is unmounted", () => {
