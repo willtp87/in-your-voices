@@ -2,7 +2,6 @@ import { Text } from "@rneui/themed";
 import React, { useEffect } from "react";
 import "../../i18n/i18n";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
 
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { increment, selectCount } from "../../store/timeInAppSlice";
@@ -21,9 +20,5 @@ export default function TimeInApp() {
     return () => clearInterval(interval);
   }, [dispatch]);
 
-  return (
-    <View>
-      <Text>{t("timeInApp", { timeInApp })}</Text>
-    </View>
-  );
+  return <Text>{t("timeInApp", { timeInApp })}</Text>;
 }
