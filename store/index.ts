@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import numbersReducer from "./numbersSlice";
 import timeInAppReducer from "./timeInAppSlice";
 
 export const store = configureStore({
   reducer: {
     timeInApp: timeInAppReducer,
+    numbers: numbersReducer,
   },
 });
 

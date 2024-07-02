@@ -1,4 +1,18 @@
 {
     "mainTitle": "Dans tes voix!",
-    "timeInApp": "Temps passé dans l'application: {{timeInApp}}"
+    "timeInApp": "Temps passé dans l'application: {{timeInApp}}",
+    "numbersTitle": "Nombres",
+    "numbers": {
+        "0": "Zéro",
+        "1": "Un",
+        "2": "Deux",
+        "3": "Trois",
+        "4": "Quatre",
+        "5": "Cinq",
+        "6": "Six",
+        "7": "Sept",
+        "8": "Huit",
+        "9": "Neuf",
+        "10": "Dix"
+    }
 }

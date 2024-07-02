@@ -16,7 +16,16 @@ global.afterEach(() => {
 
 // https://github.com/expo/expo/issues/27496
 jest.mock("expo-localization", () => ({
+  ...jest.requireActual("expo-localization"),
   getLocales: jest.fn(() => {
     return [{ languageCode: "en" }];
+  }),
+}));
+
+// Mock useNavigation hook. So that we can test components that use it.
+jest.mock("expo-router", () => ({
+  ...jest.requireActual("expo-router"),
+  useNavigation: jest.fn(() => {
+    return { setOptions: jest.fn() };
   }),
 }));
