@@ -1,5 +1,5 @@
 import { Button } from "@rneui/themed";
-import { Link, useNavigation, useRouter } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import "../i18n/i18n";
@@ -20,12 +20,10 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Link href="/Numbers">
-        <Button
-          title={t("numbersTitle")}
-          onPress={() => router.push("/numbers")}
-        />
-      </Link>
+      <Button
+        title={t("numbersTitle")}
+        onPress={() => router.push("/numbers")}
+      />
       <TimeInApp />
     </View>
   );
