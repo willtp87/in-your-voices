@@ -3,7 +3,7 @@ import React from "react";
 import { Provider } from "react-redux";
 
 import { store } from "../../store";
-import Numbers from "../Numbers";
+import Numbers from "../numbers";
 
 describe("<Numbers />", () => {
   it("generates a component", () => {

@@ -23,7 +23,7 @@ export default function Index() {
       <Link href="/Numbers">
         <Button
           title={t("numbersTitle")}
-          onPress={() => router.push("/Numbers")}
+          onPress={() => router.push("/numbers")}
         />
       </Link>
       <TimeInApp />
