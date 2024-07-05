@@ -8,6 +8,7 @@ import { StyleSheet, View } from "react-native";
 
 import TimeInApp from "../components/TimeInApp";
 
+// Main app screen.
 export default function Index() {
   const { t } = useTranslation();
   const navigation = useNavigation();

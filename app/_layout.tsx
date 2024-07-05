@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 
 import { store } from "../store";
 
+// App entry.
 export default function App() {
   const theme = createTheme({ mode: "dark" });
   return (

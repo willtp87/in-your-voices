@@ -7,6 +7,7 @@ import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { increment, reset, selectCount } from "../store/numbersSlice";
 import "../i18n/i18n";
 
+// Numbers screen.
 export default function Page() {
   const { t } = useTranslation();
   const navigation = useNavigation();

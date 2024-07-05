@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import type { RootState } from ".";
 
+// Tracks the current number.
 // Typing for `state`.
 interface numbersState {
   value: number;

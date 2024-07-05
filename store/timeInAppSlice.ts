@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import type { RootState } from ".";
 
+// Time in app.
 // Typing for `state`.
 interface timeInAppState {
   value: number;

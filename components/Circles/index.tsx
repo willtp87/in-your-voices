@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
+// Draws a number of circles.
 export default function Circles({ count }: { count: number }) {
   const circles = [];
   for (let i = 0; i < count; i++) {
