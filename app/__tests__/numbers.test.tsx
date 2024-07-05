@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react-native";
+import { render, screen, act } from "@testing-library/react-native";
 import React from "react";
 import { Provider } from "react-redux";
 
@@ -23,6 +23,9 @@ describe("<Numbers />", () => {
     );
 
     expect(screen.queryByText("0")).toBeTruthy();
-    // @todo: test that the number increments over time.
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+    expect(screen.queryByText("1")).toBeTruthy();
   });
 });
