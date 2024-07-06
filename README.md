@@ -3,6 +3,10 @@
 An IOS app that helps you teach your child with your voices.
 [Documentation](https://willtp87.github.io/in-your-voices/)
 
+## App Docs
+
+* [Numbers](./docs/numbers.md)
+
 ## Disclaimer
 
 This app was built to help one family. Its author is a software developer and not a child educator.
