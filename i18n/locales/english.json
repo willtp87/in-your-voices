@@ -1,6 +1,8 @@
 {
     "mainTitle": "In your voices!",
     "timeInApp": "Time in app: {{timeInApp}}",
+    "settingsTitle": "Settings",
+    "darkMode": "Dark mode:",
     "numbersTitle": "Numbers",
     "numbers": {
         "0": "Zero",

@@ -6,12 +6,12 @@ import { store } from "../../store";
 import Index from "../index";
 
 describe("<Index />", () => {
-  it("Has expected number of children.", () => {
+  it("has expected number of children", () => {
     const tree: any = render(
       <Provider store={store}>
         <Index />
       </Provider>,
     ).toJSON();
-    expect(tree.children.length).toBe(2);
+    expect(tree.children.length).toBe(3);
   });
 });

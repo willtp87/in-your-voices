@@ -1,4 +1,4 @@
-import { Button } from "@rneui/themed";
+import { Button, Icon } from "@rneui/themed";
 import { useNavigation, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
@@ -26,6 +26,11 @@ export default function Index() {
         onPress={() => router.push("/numbers")}
       />
       <TimeInApp />
+      <Icon
+        name="settings"
+        type="material"
+        onPress={() => router.push("/settings")}
+      />
     </View>
   );
 }
