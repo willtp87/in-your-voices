@@ -12,6 +12,11 @@ An IOS app that helps you teach your child with your voices.
 
 This app was built to help one family. Its author is a software developer and not a child educator.
 
+## Alternatives
+
+* [Toniebox](https://tonies.com/en-eu/tonieboxes/)
+* [Yoto Players](https://ca.yotoplay.com/)
+
 ## Maintainers
 
 * [William Panting](https://github.com/willtp87)
