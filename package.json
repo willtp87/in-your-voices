@@ -21,7 +21,7 @@
     "expo-localization": "^15.0.3",
     "expo-modules-autolinking": "^1.11.1",
     "expo-modules-core": "^1.12.9",
-    "expo-router": "~3.5.17",
+    "expo-router": "~3.5.18",
     "expo-status-bar": "~1.12.1",
     "i18next": "^23.12.2",
     "intl-pluralrules": "^2.0.1",
