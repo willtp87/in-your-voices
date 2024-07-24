@@ -16,9 +16,14 @@ import withStore from "../store/withStore";
 // App entry.
 const Wrapper = function App() {
   const settings = useAppSelector(selectSettings);
-  const theme = createTheme(
-    settings.darkTheme ? { mode: "dark" } : { mode: "light" },
-  );
+  const theme = createTheme({
+    components: {
+      Button: {
+        style: { padding: 10 },
+      },
+    },
+    mode: settings.darkTheme ? "dark" : "light",
+  });
 
   return (
     <NavThemeProvider value={settings.darkTheme ? DarkTheme : DefaultTheme}>
