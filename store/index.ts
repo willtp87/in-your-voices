@@ -15,6 +15,7 @@ import {
 import numbersReducer from "./numbersSlice";
 import settingsReducer from "./settingsSlice";
 import timeInAppReducer from "./timeInAppSlice";
+import voicesReducer from "./voicesSlice";
 
 // Only persist the `settings` slice.
 const persistConfig = {
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   timeInApp: timeInAppReducer,
   settings: settingsReducer,
   numbers: numbersReducer,
+  voices: voicesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

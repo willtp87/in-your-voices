@@ -4,6 +4,8 @@
     "settingsTitle": "Paramètres",
     "darkMode": "Mode sombre:",
     "numbersTitle": "Nombres",
+    "voicesTitle": "Voix",
+    "add": "Ajouter",
     "numbers": {
         "0": "Zéro",
         "1": "Un",

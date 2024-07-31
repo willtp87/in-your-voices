@@ -4,6 +4,8 @@
     "settingsTitle": "Settings",
     "darkMode": "Dark mode:",
     "numbersTitle": "Numbers",
+    "voicesTitle": "Voices",
+    "add": "Add",
     "numbers": {
         "0": "Zero",
         "1": "One",

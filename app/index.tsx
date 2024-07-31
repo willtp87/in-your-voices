@@ -29,7 +29,7 @@ export default function Index() {
       <Icon
         name="settings"
         type="material"
-        onPress={() => router.push("/settings")}
+        onPress={() => router.push("/config")}
       />
     </View>
   );

@@ -3,7 +3,7 @@ import React from "react";
 import { Provider } from "react-redux";
 
 import { store } from "../../store";
-import Settings from "../settings";
+import Settings from "../config";
 
 describe("<Settings />", () => {
   it("has dark mode", () => {
