@@ -7,7 +7,6 @@ import { store } from "../../store";
 
 describe("<TimeInApp />", () => {
   it("increments the timer each second", () => {
-    jest.useFakeTimers();
     render(
       <Provider store={store}>
         <TimeInApp />

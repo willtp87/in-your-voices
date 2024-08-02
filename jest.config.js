@@ -1,5 +1,5 @@
 module.exports = {
-  testEnvironment: "jsdom",
+  testEnvironment: "node",
   preset: "jest-expo",
   transform: {
     "^.+\\.tsx?$": [
@@ -17,4 +17,5 @@ module.exports = {
     "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@rneui)",
   ],
   setupFilesAfterEnv: ["./jest.setup.ts"],
+  fakeTimers: { enableGlobally: true },
 };
