@@ -3,10 +3,10 @@
 This is the entry point for managing voices.
 You can:
 
-* TBD
+* Add voices
 
 In the future you will be able to:
 
 * Delete voices
 * Edit voices
-* Add voices
+* Add name and description to voices

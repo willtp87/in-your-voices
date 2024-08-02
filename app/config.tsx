@@ -24,7 +24,6 @@ export default function Page() {
   return (
     <ScrollView
       contentContainerStyle={{
-        flex: 1,
         margin: 25,
       }}
     >

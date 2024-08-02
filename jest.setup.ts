@@ -8,7 +8,6 @@ global.beforeEach(() => {
   global.clearImmediate =
     jest.useRealTimers as unknown as typeof clearImmediate;
 
-  jest.useFakeTimers();
 });
 global.afterEach(() => {
   jest.useRealTimers();

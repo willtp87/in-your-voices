@@ -16,6 +16,7 @@ describe("<Numbers />", () => {
   });
 
   it("it increments over time", () => {
+    jest.useFakeTimers();
     render(
       <Provider store={store}>
         <Numbers />
