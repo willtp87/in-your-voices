@@ -36,7 +36,7 @@ export default function Page() {
   return (
     <ScrollView
       contentContainerStyle={{
-        margin: 25,
+        padding: 15,
       }}
     >
       {voicesList}
