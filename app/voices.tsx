@@ -21,7 +21,6 @@ export default function Page() {
   useEffect(() => {
     dispatch(getVoices());
   }, [dispatch]);
-
   const voicesList = [];
   for (let i = 0; i < voices.length; i++) {
     // todo: populate voice view

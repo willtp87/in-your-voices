@@ -4,36 +4,6 @@ import * as FileSystem from "expo-file-system";
 import type { RootState } from ".";
 
 // Tracks voices.
-const voicesDir = FileSystem.documentDirectory + "voices/";
-const ensureVoicesDir = async () => {
-  const voicesDirInfo = await FileSystem.getInfoAsync(voicesDir);
-  if (!voicesDirInfo.exists) {
-    await FileSystem.makeDirectoryAsync(voicesDir, { intermediates: true });
-  }
-};
-
-// Get voices.
-export const getVoices = createAsyncThunk("getVoices", async () => {
-  await ensureVoicesDir();
-  const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
-  const voices = voiceDirs.map((voice) => {
-    return { dir: voicesDir + voice };
-  });
-  return voices;
-});
-
-// Create a voice.
-export const createVoice = createAsyncThunk("createVoice", async () => {
-  await ensureVoicesDir();
-  const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
-  const voiceDir = voicesDir + voiceDirs.length;
-  const voiceDirInfo = await FileSystem.getInfoAsync(voiceDir);
-  if (!voiceDirInfo.exists) {
-    await FileSystem.makeDirectoryAsync(voiceDir, { intermediates: true });
-  }
-  return { dir: voiceDir };
-});
-
 // Typing for `state`.
 interface voice {
   dir: string;
@@ -43,6 +13,45 @@ interface voicesState {
   isLoading: boolean;
   error: string | null | undefined;
 }
+
+// Where all voices are.
+const voicesDir = FileSystem.documentDirectory + "voices/";
+
+// Ensure voices directory present.
+const ensureVoicesDir = async () => {
+  const voicesDirInfo = await FileSystem.getInfoAsync(voicesDir);
+  if (!voicesDirInfo.exists || !voicesDirInfo.isDirectory) {
+    await FileSystem.deleteAsync(voicesDir, { idempotent: true });
+    await FileSystem.makeDirectoryAsync(voicesDir, { intermediates: true });
+  }
+};
+
+// Get voices.
+export const getVoices = createAsyncThunk("getVoices", async () => {
+  await ensureVoicesDir();
+  const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
+  let voices: voice[] = [];
+  if (voiceDirs) {
+    voices = voiceDirs.map((voice) => {
+      return { dir: voicesDir + voice };
+    });
+  }
+  return voices;
+});
+
+// Create a voice.
+export const createVoice = createAsyncThunk("createVoice", async () => {
+  await ensureVoicesDir();
+  const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
+  const voiceDir = voicesDir + (voiceDirs ? voiceDirs.length : 0);
+  const voiceDirInfo = await FileSystem.getInfoAsync(voiceDir);
+  if (!voiceDirInfo.exists || !voiceDirInfo.isDirectory) {
+    await FileSystem.deleteAsync(voiceDir, { idempotent: true });
+    await FileSystem.makeDirectoryAsync(voiceDir, { intermediates: true });
+  }
+  return { dir: voiceDir };
+});
+
 const initialState: voicesState = {
   voices: [],
   isLoading: false,
