@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "../../store";
 import Settings from "../config";
 
-describe("<Settings />", () => {
+describe("<Config />", () => {
   it("has dark mode", () => {
     render(
       <Provider store={store}>
