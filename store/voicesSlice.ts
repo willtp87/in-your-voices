@@ -4,7 +4,7 @@ import * as FileSystem from "expo-file-system";
 import type { RootState } from ".";
 
 // Tracks voices.
-const voicesDir = FileSystem.cacheDirectory + "voices/";
+const voicesDir = FileSystem.documentDirectory + "voices/";
 const ensureVoicesDir = async () => {
   const voicesDirInfo = await FileSystem.getInfoAsync(voicesDir);
   if (!voicesDirInfo.exists) {
@@ -64,6 +64,7 @@ export const voicesSlice = createSlice({
       state.voices.push(action.payload);
     });
     builder.addCase(createVoice.rejected, (state, action) => {
+      console.log(action.error.message);
       state.isLoading = false;
       state.error = action.error.message;
     });
@@ -77,6 +78,7 @@ export const voicesSlice = createSlice({
       state.voices = action.payload;
     });
     builder.addCase(getVoices.rejected, (state, action) => {
+      console.log(action.error.message);
       state.isLoading = false;
       state.error = action.error.message;
       state.voices = [];
