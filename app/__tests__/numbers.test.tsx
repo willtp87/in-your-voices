@@ -23,10 +23,10 @@ describe("<Numbers />", () => {
       </Provider>,
     );
 
-    expect(screen.queryByText("0")).toBeTruthy();
+    expect(screen.getByText("0"));
     act(() => {
       jest.advanceTimersByTime(5000);
     });
-    expect(screen.queryByText("1")).toBeTruthy();
+    expect(screen.getByText("1"));
   });
 });

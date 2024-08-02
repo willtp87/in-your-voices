@@ -13,27 +13,27 @@ describe("<TimeInApp />", () => {
         <TimeInApp />
       </Provider>,
     );
-    expect(screen.getByText("0", { exact: false })).toBeTruthy();
+    expect(screen.getByText("0", { exact: false }));
 
     act(() => {
       jest.advanceTimersByTime(1000);
     });
-    expect(screen.getByText("1", { exact: false })).toBeTruthy();
+    expect(screen.getByText("1", { exact: false }));
 
     act(() => {
       jest.advanceTimersByTime(1000);
     });
-    expect(screen.getByText("2", { exact: false })).toBeTruthy();
+    expect(screen.getByText("2", { exact: false }));
 
     act(() => {
       jest.advanceTimersByTime(500);
     });
-    expect(screen.getByText("2", { exact: false })).toBeTruthy();
+    expect(screen.getByText("2", { exact: false }));
 
     act(() => {
       jest.advanceTimersByTime(500);
     });
-    expect(screen.getByText("3", { exact: false })).toBeTruthy();
+    expect(screen.getByText("3", { exact: false }));
   });
 
   it("clears the interval when the component is unmounted", () => {

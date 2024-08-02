@@ -11,8 +11,8 @@ describe("<Config />", () => {
       <Provider store={store}>
         <Settings />
       </Provider>,
-    ).toJSON();
-    expect(screen.queryByText("Dark mode:")).toBeTruthy();
+    );
+    expect(screen.getByText("Dark mode:"));
   });
   it("has expected number of children", () => {
     const tree: any = render(

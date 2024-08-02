@@ -11,7 +11,7 @@ describe("<Number />", () => {
         <Number num={0} word="Zero" />
       </Provider>,
     );
-    expect(screen.queryByText("0")).toBeTruthy();
-    expect(screen.queryByText("Zero")).toBeTruthy();
+    expect(screen.getByText("0"));
+    expect(screen.getByText("Zero"));
   });
 });
