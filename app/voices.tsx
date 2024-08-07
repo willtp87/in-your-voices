@@ -1,8 +1,8 @@
-import { Button, Text } from "@rneui/themed";
+import { Button, ListItem } from "@rneui/themed";
 import { useNavigation } from "expo-router";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { selectVoices, getVoices, createVoice } from "../store/voicesSlice";
@@ -21,24 +21,24 @@ export default function Page() {
   useEffect(() => {
     dispatch(getVoices());
   }, [dispatch]);
-  const voicesList = [];
-  for (let i = 0; i < voices.length; i++) {
-    // todo: populate voice view
-    voicesList.push(
-      <View key={i}>
-        <Text>{voices[i].dir}</Text>
-      </View>,
-    );
-  }
 
-  // todo: add metadata to voices
+  // @todo: add metadata to voices
+  // @todo: delet voices
+  // @todo: populate list view
   return (
     <ScrollView
       contentContainerStyle={{
         padding: 15,
       }}
     >
-      {voicesList}
+      {voices.map((voice, i) => (
+        <ListItem key={i} bottomDivider>
+          <ListItem.Content>
+            <ListItem.Title>{voices[i].dir}</ListItem.Title>
+          </ListItem.Content>
+          <ListItem.Chevron />
+        </ListItem>
+      ))}
       <Button raised title={t("add")} onPress={() => dispatch(createVoice())} />
     </ScrollView>
   );
