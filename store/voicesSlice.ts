@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as FileSystem from "expo-file-system";
 
 import type { RootState } from ".";
+import { forceCreateDir } from "../lib/files";
 
 // Tracks voices.
 // Typing for `state`.
@@ -17,18 +18,9 @@ interface voicesState {
 // Where all voices are.
 const voicesDir = FileSystem.documentDirectory + "voices/";
 
-// Ensure voices directory present.
-const ensureVoicesDir = async () => {
-  const voicesDirInfo = await FileSystem.getInfoAsync(voicesDir);
-  if (!voicesDirInfo.exists || !voicesDirInfo.isDirectory) {
-    await FileSystem.deleteAsync(voicesDir, { idempotent: true });
-    await FileSystem.makeDirectoryAsync(voicesDir, { intermediates: true });
-  }
-};
-
 // Get voices.
 export const getVoices = createAsyncThunk("getVoices", async () => {
-  await ensureVoicesDir();
+  await forceCreateDir(voicesDir);
   const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
   let voices: voice[] = [];
   if (voiceDirs) {
@@ -41,14 +33,10 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
 
 // Create a voice.
 export const createVoice = createAsyncThunk("createVoice", async () => {
-  await ensureVoicesDir();
+  await forceCreateDir(voicesDir);
   const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
   const voiceDir = voicesDir + (voiceDirs ? voiceDirs.length : 0);
-  const voiceDirInfo = await FileSystem.getInfoAsync(voiceDir);
-  if (!voiceDirInfo.exists || !voiceDirInfo.isDirectory) {
-    await FileSystem.deleteAsync(voiceDir, { idempotent: true });
-    await FileSystem.makeDirectoryAsync(voiceDir, { intermediates: true });
-  }
+  await forceCreateDir(voiceDir);
   return { dir: voiceDir };
 });
 
