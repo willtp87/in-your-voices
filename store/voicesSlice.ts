@@ -39,6 +39,14 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
   await forceCreateDir(voiceDir);
   return { dir: voiceDir };
 });
+// Delete a voice.
+export const deleteVoice = createAsyncThunk(
+  "deleteVoice",
+  async (dir: string) => {
+    await FileSystem.deleteAsync(dir, { idempotent: true });
+    return { dir };
+  },
+);
 
 const initialState: voicesState = {
   voices: [],
@@ -52,6 +60,21 @@ export const voicesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // Delete voice.
+    builder.addCase(deleteVoice.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteVoice.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.voices = state.voices.filter(
+        (voice) => voice.dir !== action.payload.dir,
+      );
+    });
+    builder.addCase(deleteVoice.rejected, (state, action) => {
+      console.log(action.error.message);
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
     // Create voice.
     builder.addCase(createVoice.pending, (state) => {
       state.isLoading = true;

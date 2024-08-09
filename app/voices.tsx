@@ -1,11 +1,16 @@
-import { Button, ListItem } from "@rneui/themed";
+import { Button, ListItem, Icon } from "@rneui/themed";
 import { useNavigation } from "expo-router";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
 
 import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { selectVoices, getVoices, createVoice } from "../store/voicesSlice";
+import {
+  selectVoices,
+  getVoices,
+  createVoice,
+  deleteVoice,
+} from "../store/voicesSlice";
 import "../i18n/i18n";
 
 // Voices entry screen.
@@ -22,9 +27,6 @@ export default function Page() {
     dispatch(getVoices());
   }, [dispatch]);
 
-  // @todo: add metadata to voices
-  // @todo: delet voices
-  // @todo: populate list view
   return (
     <ScrollView
       contentContainerStyle={{
@@ -34,9 +36,13 @@ export default function Page() {
       {voices.map((voice, i) => (
         <ListItem key={i} bottomDivider>
           <ListItem.Content>
-            <ListItem.Title>{voices[i].dir}</ListItem.Title>
+            <ListItem.Title>{voice.dir}</ListItem.Title>
           </ListItem.Content>
-          <ListItem.Chevron />
+          <Icon
+            name="delete"
+            type="material"
+            onPress={() => dispatch(deleteVoice(voice.dir))}
+          />
         </ListItem>
       ))}
       <Button raised title={t("add")} onPress={() => dispatch(createVoice())} />
