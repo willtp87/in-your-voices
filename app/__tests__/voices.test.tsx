@@ -15,7 +15,7 @@ describe("<Voices />", () => {
     );
     expect(await screen.findByText("Add"));
     await user.press(screen.getByRole("button", { name: "Add" }));
-    expect(await screen.findByText("0", { exact: false }));
+    expect(await screen.findByText("1", { exact: false }));
   });
   it("can delete voices", async () => {
     const user = userEvent.setup();
@@ -26,8 +26,8 @@ describe("<Voices />", () => {
     );
     expect(await screen.findByText("Add"));
     await user.press(screen.getByRole("button", { name: "Add" }));
-    expect(await screen.findByText("0", { exact: false }));
+    expect(await screen.findByText("1", { exact: false }));
     await user.press(screen.getByTestId("RNE__ICON__CONTAINER_ACTION"));
-    expect(await screen.queryByText("0", { exact: false })).toBeFalsy();
+    expect(await screen.queryByText("1", { exact: false })).toBeFalsy();
   });
 });

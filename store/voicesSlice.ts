@@ -35,10 +35,18 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
 export const createVoice = createAsyncThunk("createVoice", async () => {
   await forceCreateDir(voicesDir);
   const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
-  const voiceDir = voicesDir + (voiceDirs ? voiceDirs.length : 0);
+  const voiceDir =
+    voicesDir +
+    (voiceDirs
+      ? voiceDirs.reduce((acc: number, value: string) => {
+          return (acc =
+            acc > parseInt(value, 10) ? acc : parseInt(value, 10) + 1);
+        }, 1)
+      : 1);
   await forceCreateDir(voiceDir);
   return { dir: voiceDir };
 });
+
 // Delete a voice.
 export const deleteVoice = createAsyncThunk(
   "deleteVoice",
