@@ -34,6 +34,7 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
 // Create a voice.
 export const createVoice = createAsyncThunk("createVoice", async () => {
   await forceCreateDir(voicesDir);
+
   const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
   const voiceDir =
     voicesDir +
@@ -43,7 +44,10 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
             acc > parseInt(value, 10) ? acc : parseInt(value, 10) + 1);
         }, 1)
       : 1);
+
   await forceCreateDir(voiceDir);
+  await forceCreateDir(voiceDir + "/Numbers");
+
   return { dir: voiceDir };
 });
 
