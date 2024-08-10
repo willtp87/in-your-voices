@@ -3,6 +3,7 @@ import { useNavigation } from "expo-router";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import {
@@ -28,24 +29,30 @@ export default function Page() {
   }, [dispatch]);
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        padding: 15,
-      }}
-    >
-      {voices.map((voice, i) => (
-        <ListItem key={i} bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title>{voice.dir}</ListItem.Title>
-          </ListItem.Content>
-          <Icon
-            name="delete"
-            type="material"
-            onPress={() => dispatch(deleteVoice(voice.dir))}
-          />
-        </ListItem>
-      ))}
-      <Button raised title={t("add")} onPress={() => dispatch(createVoice())} />
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView
+        contentContainerStyle={{
+          padding: 15,
+        }}
+      >
+        {voices.map((voice, i) => (
+          <ListItem key={i} bottomDivider>
+            <ListItem.Content>
+              <ListItem.Title>{voice.dir}</ListItem.Title>
+            </ListItem.Content>
+            <Icon
+              name="delete"
+              type="material"
+              onPress={() => dispatch(deleteVoice(voice.dir))}
+            />
+          </ListItem>
+        ))}
+        <Button
+          raised
+          title={t("add")}
+          onPress={() => dispatch(createVoice())}
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 }

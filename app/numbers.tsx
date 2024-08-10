@@ -1,6 +1,7 @@
 import { useNavigation } from "expo-router";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import Number from "../components/Number";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
@@ -30,5 +31,9 @@ export default function Page() {
     navigation.setOptions({ title: t("numbersTitle") });
   }, [t, navigation]);
 
-  return <Number num={num} word={t(`numbers.${num}`)} />;
+  return (
+    <SafeAreaView>
+      <Number num={num} word={t(`numbers.${num}`)} />
+    </SafeAreaView>
+  );
 }

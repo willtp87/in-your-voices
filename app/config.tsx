@@ -3,6 +3,7 @@ import { useNavigation, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { switchDarkTheme, selectSettings } from "../store/settingsSlice";
@@ -22,19 +23,24 @@ export default function Page() {
   }, [t, navigation]);
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        padding: 15,
-      }}
-    >
-      <Text>{t("darkMode")}</Text>
-      <Switch
-        value={settings.darkTheme}
-        onValueChange={(value) => {
-          dispatch(switchDarkTheme());
+    <SafeAreaView>
+      <ScrollView
+        contentContainerStyle={{
+          padding: 15,
         }}
-      />
-      <Button title={t("voicesTitle")} onPress={() => router.push("/voices")} />
-    </ScrollView>
+      >
+        <Text>{t("darkMode")}</Text>
+        <Switch
+          value={settings.darkTheme}
+          onValueChange={(value) => {
+            dispatch(switchDarkTheme());
+          }}
+        />
+        <Button
+          title={t("voicesTitle")}
+          onPress={() => router.push("/voices")}
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
