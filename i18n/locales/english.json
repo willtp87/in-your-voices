@@ -6,6 +6,9 @@
     "numbersTitle": "Numbers",
     "voicesTitle": "Voices",
     "add": "Add",
+    "confirm": "Confirm",
+    "pleaseConfirm": "Please Confirm",
+    "cancel": "Cancel",
     "numbers": {
         "0": "Zero",
         "1": "One",

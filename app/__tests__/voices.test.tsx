@@ -28,6 +28,7 @@ describe("<Voices />", () => {
     await user.press(screen.getByRole("button", { name: "Add" }));
     expect(await screen.findByText("1", { exact: false }));
     await user.press(screen.getByTestId("RNE__ICON__CONTAINER_ACTION"));
+    await user.press(screen.getByText("Confirm"));
     expect(await screen.queryByText("1", { exact: false })).toBeFalsy();
   });
 });

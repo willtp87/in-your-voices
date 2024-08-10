@@ -1,6 +1,6 @@
-import { Button, ListItem, Icon } from "@rneui/themed";
+import { Button, ListItem, Icon, Dialog } from "@rneui/themed";
 import { useNavigation } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,6 +11,7 @@ import {
   getVoices,
   createVoice,
   deleteVoice,
+  voice as voiceType,
 } from "../store/voicesSlice";
 import "../i18n/i18n";
 
@@ -20,6 +21,9 @@ export default function Page() {
   const navigation = useNavigation();
   const voices = useAppSelector(selectVoices);
   const dispatch = useAppDispatch();
+
+  const [deleteVisible, setDeleteVisible] = useState(false);
+  const [activeVoice, setActiveVoice] = useState<voiceType>();
 
   useEffect(() => {
     navigation.setOptions({ title: t("voicesTitle") });
@@ -43,10 +47,32 @@ export default function Page() {
             <Icon
               name="delete"
               type="material"
-              onPress={() => dispatch(deleteVoice(voice.dir))}
+              onPress={() => {
+                setActiveVoice(voice);
+                setDeleteVisible(true);
+              }}
             />
           </ListItem>
         ))}
+        <Dialog
+          isVisible={deleteVisible}
+          onBackdropPress={() => setDeleteVisible(false)}
+        >
+          <Dialog.Title title={t("pleaseConfirm")} />
+          <Dialog.Actions>
+            <Dialog.Button
+              title={t("confirm")}
+              onPress={() => {
+                if (activeVoice) dispatch(deleteVoice(activeVoice.dir));
+                setDeleteVisible(false);
+              }}
+            />
+            <Dialog.Button
+              title={t("cancel")}
+              onPress={() => setDeleteVisible(false)}
+            />
+          </Dialog.Actions>
+        </Dialog>
         <Button
           raised
           title={t("add")}

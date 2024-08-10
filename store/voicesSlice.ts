@@ -6,7 +6,7 @@ import { forceCreateDir } from "../lib/files";
 
 // Tracks voices.
 // Typing for `state`.
-interface voice {
+export interface voice {
   dir: string;
 }
 interface voicesState {

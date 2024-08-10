@@ -6,6 +6,9 @@
     "numbersTitle": "Nombres",
     "voicesTitle": "Voix",
     "add": "Ajouter",
+    "confirm": "Confirmer",
+    "pleaseConfirm": "Veuillez Confirmer",
+    "cancel": "Annuler",
     "numbers": {
         "0": "Zéro",
         "1": "Un",
