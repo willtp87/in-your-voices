@@ -5,9 +5,14 @@ import type { RootState } from ".";
 import { forceCreateDir } from "../lib/files";
 
 // Tracks voices.
+// Filename for voice data.
+const voiceJSON = "/voice.json";
+
 // Typing for `state`.
 export interface voice {
   dir: string;
+  title: string | null;
+  desc: string | null;
 }
 interface voicesState {
   voices: voice[];
@@ -24,9 +29,27 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
   const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
   let voices: voice[] = [];
   if (voiceDirs) {
-    voices = voiceDirs.map((voice) => {
-      return { dir: voicesDir + voice };
-    });
+    voices = await Promise.all(
+      voiceDirs.map(async (voiceDir) => {
+        let voiceVals: voice = {
+          dir: voicesDir + voiceDir,
+          title: null,
+          desc: null,
+        };
+        try {
+          voiceVals = JSON.parse(
+            await FileSystem.readAsStringAsync(
+              voicesDir + voiceDir + voiceJSON,
+            ),
+          );
+        } catch {}
+        return {
+          dir: voiceVals.dir,
+          title: voiceVals.title ?? null,
+          desc: voiceVals.desc ?? null,
+        };
+      }),
+    );
   }
   return voices;
 });
@@ -48,7 +71,7 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
   await forceCreateDir(voiceDir);
   await forceCreateDir(voiceDir + "/Numbers");
 
-  return { dir: voiceDir };
+  return { dir: voiceDir, title: null, desc: null };
 });
 
 // Delete a voice.
@@ -57,6 +80,18 @@ export const deleteVoice = createAsyncThunk(
   async (dir: string) => {
     await FileSystem.deleteAsync(dir, { idempotent: true });
     return { dir };
+  },
+);
+
+// Update a voice.
+export const updateVoice = createAsyncThunk(
+  "updateVoice",
+  async (voiceIn: voice) => {
+    await FileSystem.writeAsStringAsync(
+      voiceIn.dir + voiceJSON,
+      JSON.stringify(voiceIn),
+    );
+    return voiceIn;
   },
 );
 
@@ -72,6 +107,22 @@ export const voicesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // Update voice.
+    builder.addCase(updateVoice.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateVoice.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.voices = state.voices.filter(
+        (voice) => voice.dir !== action.payload.dir,
+      );
+      state.voices.push(action.payload);
+    });
+    builder.addCase(updateVoice.rejected, (state, action) => {
+      console.log(action.error.message);
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
     // Delete voice.
     builder.addCase(deleteVoice.pending, (state) => {
       state.isLoading = true;

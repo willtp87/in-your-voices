@@ -9,6 +9,10 @@
     "confirm": "Confirmer",
     "pleaseConfirm": "Veuillez Confirmer",
     "cancel": "Annuler",
+    "title": "Titre",
+    "description": "Description",
+    "voiceInfo": "Informations Vocales",
+    "save": "Sauvegarder",
     "numbers": {
         "0": "Zéro",
         "1": "Un",
