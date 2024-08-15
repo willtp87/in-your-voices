@@ -7,13 +7,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import {
-  selectVoices,
   getVoices,
   createVoice,
   deleteVoice,
   updateVoice,
   voice as voiceType,
-} from "../store/voicesSlice";
+} from "../store/voices";
+import { selectVoices } from "../store/voicesSlice";
 import "../i18n/i18n";
 
 // Voices entry screen.
