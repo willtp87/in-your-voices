@@ -17,9 +17,7 @@ export default function Number({ num, word }: { num: number; word: string }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     margin: 20,
   },
 });

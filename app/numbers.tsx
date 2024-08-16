@@ -1,6 +1,7 @@
 import { useNavigation } from "expo-router";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Number from "../components/Number";
@@ -32,8 +33,15 @@ export default function Page() {
   }, [t, navigation]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Number num={num} word={t(`numbers.${num}`)} />
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+});
