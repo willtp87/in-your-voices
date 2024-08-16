@@ -13,6 +13,7 @@ import {
 interface voicesState {
   voices: voice[];
   isLoading: boolean;
+  managingVoice: voice | null;
   error: string | null | undefined;
 }
 
@@ -20,13 +21,18 @@ const initialState: voicesState = {
   voices: [],
   isLoading: false,
   error: null,
+  managingVoice: null,
 };
 
 // Slice definition.
 export const voicesSlice = createSlice({
   name: "voices",
   initialState,
-  reducers: {},
+  reducers: {
+    setManagingVoice: (state, action) => {
+      state.managingVoice = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     // Update voice.
     builder.addCase(updateVoice.pending, (state) => {
@@ -91,5 +97,8 @@ export const voicesSlice = createSlice({
 });
 
 // Additional exports.
+export const { setManagingVoice } = voicesSlice.actions;
 export const selectVoices = (state: RootState) => state.voices.voices;
+export const selectManagingVoice = (state: RootState) =>
+  state.voices.managingVoice;
 export default voicesSlice.reducer;

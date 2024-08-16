@@ -1,5 +1,5 @@
 import { Button, ListItem, Icon, Dialog, Input } from "@rneui/themed";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
@@ -11,9 +11,12 @@ import {
   createVoice,
   deleteVoice,
   updateVoice,
-  voice as voiceType,
 } from "../store/voices";
-import { selectVoices } from "../store/voicesSlice";
+import {
+  selectVoices,
+  selectManagingVoice,
+  setManagingVoice,
+} from "../store/voicesSlice";
 import "../i18n/i18n";
 
 // Voices entry screen.
@@ -21,11 +24,12 @@ export default function Page() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const voices = useAppSelector(selectVoices);
+  const managingVoice = useAppSelector(selectManagingVoice);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [metaDataVisible, setMetaDataVisible] = useState(false);
-  const [activeVoice, setActiveVoice] = useState<voiceType>();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
@@ -55,7 +59,7 @@ export default function Page() {
               name="edit"
               type="material"
               onPress={() => {
-                setActiveVoice(voice);
+                dispatch(setManagingVoice(voice));
                 setMetaDataVisible(true);
               }}
             />
@@ -64,8 +68,15 @@ export default function Page() {
               name="delete"
               type="material"
               onPress={() => {
-                setActiveVoice(voice);
+                dispatch(setManagingVoice(voice));
                 setDeleteVisible(true);
+              }}
+            />
+            <ListItem.Chevron
+              testID={"enterVoice" + i}
+              onPress={() => {
+                dispatch(setManagingVoice(voice));
+                router.push("/voice");
               }}
             />
           </ListItem>
@@ -79,7 +90,7 @@ export default function Page() {
             <Dialog.Button
               title={t("confirm")}
               onPress={() => {
-                if (activeVoice) dispatch(deleteVoice(activeVoice.dir));
+                if (managingVoice) dispatch(deleteVoice(managingVoice.dir));
                 setDeleteVisible(false);
               }}
             />
@@ -99,19 +110,21 @@ export default function Page() {
               label={t("title")}
               onChangeText={(value) => setTitle(value)}
               testID="title"
-              defaultValue={activeVoice?.title ?? ""}
+              defaultValue={managingVoice?.title ?? ""}
             />
             <Input
               label={t("description")}
               onChangeText={(value) => setDesc(value)}
               testID="description"
-              defaultValue={activeVoice?.desc ?? ""}
+              defaultValue={managingVoice?.desc ?? ""}
             />
             <Dialog.Button
               title={t("save")}
               onPress={() => {
-                if (activeVoice)
-                  dispatch(updateVoice({ dir: activeVoice.dir, title, desc }));
+                if (managingVoice)
+                  dispatch(
+                    updateVoice({ dir: managingVoice.dir, title, desc }),
+                  );
                 setMetaDataVisible(false);
               }}
             />

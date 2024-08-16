@@ -48,4 +48,16 @@ describe("<Voices />", () => {
     expect(await screen.queryByText("1")).toBeFalsy();
     expect(await screen.getByText("testTitle"));
   });
+  it("has voice config entry", async () => {
+    const user = userEvent.setup();
+    render(
+      <Provider store={store}>
+        <Voices />
+      </Provider>,
+    );
+    expect(await screen.findByText("Add"));
+    await user.press(screen.getByRole("button", { name: "Add" }));
+    expect(await screen.findByText("1"));
+    expect(screen.getByTestId("enterVoice0"));
+  });
 });
