@@ -12,6 +12,6 @@ describe("<RecordNumbers />", () => {
         <RecordNumbers />
       </Provider>,
     ).toJSON();
-    expect(tree.children.length).toBe(1);
+    expect(tree.children.length).toBe(2);
   });
 });
