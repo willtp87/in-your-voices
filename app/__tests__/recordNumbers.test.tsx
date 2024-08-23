@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react-native";
+import { render, screen } from "@testing-library/react-native";
 import React from "react";
 import { Provider } from "react-redux";
 
@@ -13,5 +13,14 @@ describe("<RecordNumbers />", () => {
       </Provider>,
     ).toJSON();
     expect(tree.children.length).toBe(2);
+  });
+  it("has number recorders", () => {
+    render(
+      <Provider store={store}>
+        <RecordNumbers />
+      </Provider>,
+    );
+    screen.getByTestId("mic0");
+    screen.getByTestId("mic9");
   });
 });
