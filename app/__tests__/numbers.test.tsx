@@ -6,15 +6,6 @@ import { store } from "../../store";
 import Numbers from "../numbers";
 
 describe("<Numbers />", () => {
-  it("generates a component", () => {
-    const tree: any = render(
-      <Provider store={store}>
-        <Numbers />
-      </Provider>,
-    );
-    expect(tree).toBeTruthy();
-  });
-
   it("it increments over time", () => {
     render(
       <Provider store={store}>

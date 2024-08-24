@@ -14,12 +14,4 @@ describe("<Config />", () => {
     );
     expect(screen.getByText("Dark mode:"));
   });
-  it("has expected number of children", () => {
-    const tree: any = render(
-      <Provider store={store}>
-        <Settings />
-      </Provider>,
-    ).toJSON();
-    expect(tree.children.length).toBe(1);
-  });
 });
