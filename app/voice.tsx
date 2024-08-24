@@ -24,6 +24,7 @@ export default function Page() {
     <SafeAreaView style={styles.container}>
       <Text>{managingVoice?.desc}</Text>
       <Button
+        testID="numbers"
         title={t("numbersTitle")}
         onPress={() => router.push("/recordNumbers")}
       />

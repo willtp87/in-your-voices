@@ -21,3 +21,11 @@ jest.mock("expo-router", () => ({
 jest.mock("@react-native-async-storage/async-storage", () =>
   require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
 );
+
+// https://github.com/expo/expo/issues/25494
+jest.mock("react-native-reanimated", () => null, {
+  virtual: true,
+});
+jest.mock("@testing-library/jest-native/extend-expect", () => null, {
+  virtual: true,
+});
