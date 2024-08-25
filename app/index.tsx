@@ -23,11 +23,13 @@ export default function Index() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <Button
+        testID="numbers"
         title={t("numbersTitle")}
         onPress={() => router.push("/numbers")}
       />
       <TimeInApp />
       <Icon
+        testID="config"
         name="settings"
         type="material"
         onPress={() => router.push("/config")}

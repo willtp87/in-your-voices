@@ -37,6 +37,7 @@ export default function Page() {
           }}
         />
         <Button
+          testID="voices"
           title={t("voicesTitle")}
           onPress={() => router.push("/voices")}
         />

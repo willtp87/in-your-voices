@@ -1,4 +1,5 @@
-import { render, screen, userEvent } from "@testing-library/react-native";
+import { render, userEvent } from "@testing-library/react-native";
+import { renderRouter, screen } from "expo-router/testing-library";
 import React from "react";
 import { Provider } from "react-redux";
 
@@ -48,16 +49,19 @@ describe("<Voices />", () => {
     expect(await screen.queryByText("1")).toBeFalsy();
     expect(await screen.getByText("testTitle"));
   });
-  it("has voice config entry", async () => {
+  it("can navigate to a voice", async () => {
     const user = userEvent.setup();
-    render(
-      <Provider store={store}>
-        <Voices />
-      </Provider>,
-    );
-    expect(await screen.findByText("Add"));
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Voices />
+        </Provider>
+      ),
+    });
+
     await user.press(screen.getByRole("button", { name: "Add" }));
-    expect(await screen.findByText("1"));
-    expect(screen.getByTestId("enterVoice0"));
+    await user.press(screen.getByTestId("enterVoice0"));
+    expect(screen).toHavePathname("/voice");
   });
 });

@@ -1,4 +1,5 @@
-import { render } from "@testing-library/react-native";
+import { userEvent } from "@testing-library/react-native";
+import { renderRouter, screen } from "expo-router/testing-library";
 import React from "react";
 import { Provider } from "react-redux";
 
@@ -6,12 +7,32 @@ import { store } from "../../store";
 import Index from "../index";
 
 describe("<Index />", () => {
-  it("has expected number of children", () => {
-    const tree: any = render(
-      <Provider store={store}>
-        <Index />
-      </Provider>,
-    ).toJSON();
-    expect(tree.children.length).toBe(3);
+  it("can navigate to config", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Index />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("config"));
+    expect(screen).toHavePathname("/config");
+  });
+  it("can navigate to numbers", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Index />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("numbers"));
+    expect(screen).toHavePathname("/numbers");
   });
 });
