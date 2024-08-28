@@ -22,13 +22,13 @@ export default function Page() {
   }, [t, navigation, managingVoice]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={{
+        padding: 15,
+      }}
+    >
       <Text>{managingVoice?.desc}</Text>
-      <ScrollView
-        contentContainerStyle={{
-          padding: 15,
-        }}
-      >
+      <ScrollView>
         {Array(max)
           .fill(null)
           .map((value, i) => (
