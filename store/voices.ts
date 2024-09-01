@@ -62,7 +62,7 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
       : 1);
 
   await forceCreateDir(voiceDir);
-  await forceCreateDir(voiceDir + "/Numbers");
+  await forceCreateDir(voiceDir + "/numbers");
 
   return { dir: voiceDir, title: null, desc: null };
 });

@@ -1,11 +1,13 @@
 import { Text, ListItem, Icon } from "@rneui/themed";
+import { Audio } from "expo-av";
 import { useNavigation } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../i18n/i18n";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { play, startRecording, stopRecording } from "../lib/sound";
 import { useAppSelector } from "../store/hooks";
 import { selectMax } from "../store/numbersSlice";
 import { selectManagingVoice } from "../store/voicesSlice";
@@ -16,6 +18,7 @@ export default function Page() {
   const navigation = useNavigation();
   const managingVoice = useAppSelector(selectManagingVoice);
   const max = useAppSelector(selectMax);
+  const [recording, setRecording] = useState<Audio.Recording | undefined>();
 
   useEffect(() => {
     navigation.setOptions({ title: managingVoice?.title });
@@ -37,10 +40,35 @@ export default function Page() {
                 <ListItem.Title>{i}</ListItem.Title>
               </ListItem.Content>
               <Icon
+                testID={"play" + i}
+                name="play-arrow"
+                type="material"
+                onPress={() => {
+                  play(`${managingVoice?.dir}/numbers/${i}.m4a`);
+                }}
+              />
+              <Icon
+                testID={"stop" + i}
+                name="stop"
+                type="material"
+                onPress={() => {
+                  if (recording)
+                    // @todo Store/access recordings in state.
+                    // @todo get numbers dir from state.
+                    // @todo get extension from recording uri.
+                    stopRecording(
+                      recording,
+                      `${managingVoice?.dir}/numbers/${i}.m4a`,
+                    );
+                }}
+              />
+              <Icon
                 testID={"mic" + i}
                 name="mic"
                 type="material"
-                onPress={() => {}}
+                onPress={async () => {
+                  setRecording(await startRecording());
+                }}
               />
             </ListItem>
           ))}

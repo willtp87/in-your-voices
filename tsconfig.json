@@ -11,6 +11,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
+    "strictNullChecks": true,
     "esModuleInterop": true
   },
   "extends": "expo/tsconfig.base"
