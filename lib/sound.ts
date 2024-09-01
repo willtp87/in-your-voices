@@ -5,14 +5,16 @@ import * as FileSystem from "expo-file-system";
 
 // Play a sound.
 export const play = async (audioFile: string) => {
-  const { sound } = await Audio.Sound.createAsync({ uri: audioFile });
-  await sound.playAsync();
-  // @todo: figure out if we need to unload.
-  sound.setOnPlaybackStatusUpdate(async (playbackStatus) => {
-    if (playbackStatus.isLoaded && playbackStatus.didJustFinish)
-      await sound.unloadAsync();
-  });
-  //await sound.unloadAsync();
+  try {
+    const { sound } = await Audio.Sound.createAsync({ uri: audioFile });
+    await sound.playAsync();
+    sound.setOnPlaybackStatusUpdate(async (playbackStatus) => {
+      if (playbackStatus.isLoaded && playbackStatus.didJustFinish)
+        await sound.unloadAsync();
+    });
+  } catch (err) {
+    console.error("Failed while playing sound", err);
+  }
 };
 
 // Stop recording a sound.
