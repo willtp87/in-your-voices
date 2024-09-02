@@ -55,10 +55,9 @@ export default function Page() {
                 onPress={() => {
                   if (recording)
                     // @todo Store/access recordings in state.
-                    // @todo get extension from recording uri.
                     stopRecording(
                       recording,
-                      `${managingVoice?.dir}${numbersDir}${i}.m4a`,
+                      `${managingVoice?.dir}${numbersDir}${i}.${recording.getURI()?.split(".").pop()}`,
                     );
                 }}
               />
