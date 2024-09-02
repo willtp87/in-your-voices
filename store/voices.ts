@@ -13,8 +13,10 @@ export interface voice {
   title: string | null;
   desc: string | null;
 }
-// Where all voices are.
-const voicesDir = FileSystem.documentDirectory + "voices/";
+
+// Directory constants.
+export const voicesDir = FileSystem.documentDirectory + "voices/";
+export const numbersDir = FileSystem.documentDirectory + "numbers/";
 
 // Get voices.
 export const getVoices = createAsyncThunk("getVoices", async () => {
@@ -62,7 +64,7 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
       : 1);
 
   await forceCreateDir(voiceDir);
-  await forceCreateDir(voiceDir + "/numbers");
+  await forceCreateDir(voiceDir + numbersDir);
 
   return { dir: voiceDir, title: null, desc: null };
 });

@@ -9,15 +9,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { play, startRecording, stopRecording } from "../lib/sound";
 import { useAppSelector } from "../store/hooks";
-import { selectMax } from "../store/numbersSlice";
+import { selectMax, selectDir } from "../store/numbersSlice";
 import { selectManagingVoice } from "../store/voicesSlice";
 
-// Screen to record numbers screen.
+// Screen to record numbers.
 export default function Page() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const managingVoice = useAppSelector(selectManagingVoice);
   const max = useAppSelector(selectMax);
+  const numbersDir = useAppSelector(selectDir);
   const [recording, setRecording] = useState<Audio.Recording | undefined>();
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function Page() {
                 name="play-arrow"
                 type="material"
                 onPress={() => {
-                  play(`${managingVoice?.dir}/numbers/${i}.m4a`);
+                  play(`${managingVoice?.dir}${numbersDir}${i}.m4a`);
                 }}
               />
               <Icon
@@ -54,11 +55,10 @@ export default function Page() {
                 onPress={() => {
                   if (recording)
                     // @todo Store/access recordings in state.
-                    // @todo get numbers dir from state.
                     // @todo get extension from recording uri.
                     stopRecording(
                       recording,
-                      `${managingVoice?.dir}/numbers/${i}.m4a`,
+                      `${managingVoice?.dir}${numbersDir}${i}.m4a`,
                     );
                 }}
               />
