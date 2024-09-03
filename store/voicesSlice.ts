@@ -40,10 +40,15 @@ export const voicesSlice = createSlice({
     });
     builder.addCase(updateVoice.fulfilled, (state, action) => {
       state.isLoading = false;
+      // Update voice in voice list.
       state.voices = state.voices.filter(
         (voice) => voice.dir !== action.payload.dir,
       );
       state.voices.push(action.payload);
+      // Update managing voice if it has been edited.
+      if (state.managingVoice?.dir === action.payload.dir) {
+        state.managingVoice = action.payload;
+      }
     });
     builder.addCase(updateVoice.rejected, (state, action) => {
       console.log(action.error.message);

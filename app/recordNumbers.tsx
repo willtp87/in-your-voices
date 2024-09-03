@@ -8,8 +8,9 @@ import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { play, startRecording, stopRecording } from "../lib/sound";
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { selectMax, selectDir } from "../store/numbersSlice";
+import { updateVoice } from "../store/voices";
 import { selectManagingVoice } from "../store/voicesSlice";
 
 // Screen to record numbers.
@@ -20,6 +21,7 @@ export default function Page() {
   const max = useAppSelector(selectMax);
   const numbersDir = useAppSelector(selectDir);
   const [recording, setRecording] = useState<Audio.Recording | undefined>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     navigation.setOptions({ title: managingVoice?.title });
@@ -45,7 +47,7 @@ export default function Page() {
                 name="play-arrow"
                 type="material"
                 onPress={() => {
-                  play(`${managingVoice?.dir}${numbersDir}${i}.m4a`);
+                  if (managingVoice) play(managingVoice.numberRecordings[i]);
                 }}
               />
               <Icon
@@ -53,12 +55,19 @@ export default function Page() {
                 name="stop"
                 type="material"
                 onPress={() => {
-                  if (recording)
-                    // @todo Store/access recordings in state.
-                    stopRecording(
-                      recording,
-                      `${managingVoice?.dir}${numbersDir}${i}.${recording.getURI()?.split(".").pop()}`,
+                  if (managingVoice && recording) {
+                    const recordingUri = `${managingVoice.dir}/${numbersDir}${i}.${recording.getURI()?.split(".").pop()}`;
+                    stopRecording(recording, recordingUri);
+
+                    const recordings = { ...managingVoice.numberRecordings };
+                    recordings[i] = recordingUri;
+                    dispatch(
+                      updateVoice({
+                        ...managingVoice,
+                        numberRecordings: recordings,
+                      }),
                     );
+                  }
                 }}
               />
               <Icon

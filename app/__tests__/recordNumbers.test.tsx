@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react-native";
+import { render, screen, act } from "@testing-library/react-native";
 import React from "react";
 import { Provider } from "react-redux";
 
 import { store } from "../../store";
-import { createVoice, updateVoice } from "../../store/voices";
+import { createVoice } from "../../store/voices";
 import { setManagingVoice } from "../../store/voicesSlice";
 import RecordNumbers from "../recordNumbers";
 describe("<RecordNumbers />", () => {
@@ -20,10 +20,9 @@ describe("<RecordNumbers />", () => {
     const dispatch = store.dispatch;
     const voice = { dir: "./voices/0", title: "title", desc: "desc" };
     dispatch(createVoice());
-    dispatch(setManagingVoice(voice));
-    dispatch(
-      updateVoice({ dir: voice.dir, title: voice.title, desc: voice.desc }),
-    );
+    act(() => {
+      dispatch(setManagingVoice(voice));
+    });
     render(
       <Provider store={store}>
         <RecordNumbers />

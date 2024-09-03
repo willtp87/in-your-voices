@@ -123,7 +123,11 @@ export default function Page() {
               onPress={() => {
                 if (managingVoice)
                   dispatch(
-                    updateVoice({ dir: managingVoice.dir, title, desc }),
+                    updateVoice({
+                      ...managingVoice,
+                      title,
+                      desc,
+                    }),
                   );
                 setMetaDataVisible(false);
               }}

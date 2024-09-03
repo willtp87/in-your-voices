@@ -5,18 +5,21 @@ import { forceCreateDir } from "../lib/files";
 
 // Voice CRUD.
 // Filename for voice data.
-const voiceJSON = "/voice.json";
-
+const voiceJsonBasename = "/voice.json";
+interface recordings {
+  [index: number]: string;
+}
 // Typing for `state`.
 export interface voice {
   dir: string;
   title: string | null;
   desc: string | null;
+  numberRecordings: recordings;
 }
 
 // Directory constants.
 export const voicesDir = FileSystem.documentDirectory + "voices/";
-export const numbersDir = FileSystem.documentDirectory + "numbers/";
+export const numbersDir = "numbers/";
 
 // Get voices.
 export const getVoices = createAsyncThunk("getVoices", async () => {
@@ -30,24 +33,31 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
           dir: voicesDir + voiceDir,
           title: null,
           desc: null,
+          numberRecordings: {},
         };
         try {
           voiceVals = JSON.parse(
             await FileSystem.readAsStringAsync(
-              voicesDir + voiceDir + voiceJSON,
+              voicesDir + voiceDir + voiceJsonBasename,
             ),
           );
-        } catch {}
-        return {
-          dir: voiceVals.dir,
-          title: voiceVals.title ?? null,
-          desc: voiceVals.desc ?? null,
-        };
+        } catch (err) {
+          console.log(err);
+        }
+        return voiceVals;
       }),
     );
   }
   return voices;
 });
+
+// Write a voice JSON file.
+const writeVoiceJson = async (voiceIn: voice) => {
+  return await FileSystem.writeAsStringAsync(
+    voiceIn.dir + voiceJsonBasename,
+    JSON.stringify(voiceIn),
+  );
+};
 
 // Create a voice.
 export const createVoice = createAsyncThunk("createVoice", async () => {
@@ -64,9 +74,17 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
       : 1);
 
   await forceCreateDir(voiceDir);
-  await forceCreateDir(voiceDir + numbersDir);
+  await forceCreateDir(voiceDir + "/" + numbersDir);
 
-  return { dir: voiceDir, title: null, desc: null };
+  const voice = {
+    dir: voiceDir,
+    title: null,
+    desc: null,
+    numberRecordings: {},
+  };
+  writeVoiceJson(voice);
+
+  return voice;
 });
 
 // Delete a voice.
@@ -82,10 +100,7 @@ export const deleteVoice = createAsyncThunk(
 export const updateVoice = createAsyncThunk(
   "updateVoice",
   async (voiceIn: voice) => {
-    await FileSystem.writeAsStringAsync(
-      voiceIn.dir + voiceJSON,
-      JSON.stringify(voiceIn),
-    );
+    await writeVoiceJson(voiceIn);
     return voiceIn;
   },
 );
