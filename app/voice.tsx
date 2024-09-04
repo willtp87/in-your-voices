@@ -17,7 +17,7 @@ export default function Page() {
   const managingVoice = useAppSelector(selectManagingVoice);
 
   useEffect(() => {
-    navigation.setOptions({ title: managingVoice?.title });
+    navigation.setOptions({ title: managingVoice?.title ?? t("voiceTitle") });
   }, [t, navigation, managingVoice]);
 
   return (

@@ -5,6 +5,8 @@
     "darkMode": "Mode sombre:",
     "numbersTitle": "Nombres",
     "voicesTitle": "Voix",
+    "voiceTitle": "Voix",
+    "recordNumbersTitle": "Enregistrer Nombres",
     "add": "Ajouter",
     "confirm": "Confirmer",
     "pleaseConfirm": "Veuillez Confirmer",

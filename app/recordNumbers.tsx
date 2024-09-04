@@ -24,7 +24,7 @@ export default function Page() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    navigation.setOptions({ title: managingVoice?.title });
+    navigation.setOptions({ title: t("recordNumbersTitle") });
   }, [t, navigation, managingVoice]);
 
   return (
@@ -33,6 +33,7 @@ export default function Page() {
         padding: 15,
       }}
     >
+      <Text>{managingVoice?.title}</Text>
       <Text>{managingVoice?.desc}</Text>
       <ScrollView>
         {Array(max)

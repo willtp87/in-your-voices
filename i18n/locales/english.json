@@ -5,6 +5,8 @@
     "darkMode": "Dark mode:",
     "numbersTitle": "Numbers",
     "voicesTitle": "Voices",
+    "voiceTitle": "Voice",
+    "recordNumbersTitle": "Record Numbers",
     "add": "Add",
     "confirm": "Confirm",
     "pleaseConfirm": "Please Confirm",
