@@ -51,7 +51,7 @@ export const voicesSlice = createSlice({
       }
     });
     builder.addCase(updateVoice.rejected, (state, action) => {
-      console.log(action.error.message);
+      console.error(action.error.message);
       state.isLoading = false;
       state.error = action.error.message;
     });
@@ -66,7 +66,7 @@ export const voicesSlice = createSlice({
       );
     });
     builder.addCase(deleteVoice.rejected, (state, action) => {
-      console.log(action.error.message);
+      console.error(action.error.message);
       state.isLoading = false;
       state.error = action.error.message;
     });
@@ -79,7 +79,7 @@ export const voicesSlice = createSlice({
       state.voices.push(action.payload);
     });
     builder.addCase(createVoice.rejected, (state, action) => {
-      console.log(action.error.message);
+      console.error(action.error.message);
       state.isLoading = false;
       state.error = action.error.message;
     });
@@ -93,7 +93,7 @@ export const voicesSlice = createSlice({
       state.voices = action.payload;
     });
     builder.addCase(getVoices.rejected, (state, action) => {
-      console.log(action.error.message);
+      console.error(action.error.message);
       state.isLoading = false;
       state.error = action.error.message;
       state.voices = [];

@@ -42,7 +42,7 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
             ),
           );
         } catch (err) {
-          console.log(err);
+          console.error("Failed while getting voices", err);
         }
         return voiceVals;
       }),
