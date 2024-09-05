@@ -20,7 +20,7 @@ export default function Page() {
   const managingVoice = useAppSelector(selectManagingVoice);
   const max = useAppSelector(selectMax);
   const numbersDir = useAppSelector(selectDir);
-  const [recording, setRecording] = useState<Audio.Recording | undefined>();
+  const [recording, setRecording] = useState<Audio.Recording | null>();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -43,42 +43,49 @@ export default function Page() {
               <ListItem.Content>
                 <ListItem.Title>{i}</ListItem.Title>
               </ListItem.Content>
-              <Icon
-                testID={"play" + i}
-                name="play-arrow"
-                type="material"
-                onPress={() => {
-                  if (managingVoice) play(managingVoice.numberRecordings[i]);
-                }}
-              />
-              <Icon
-                testID={"stop" + i}
-                name="stop"
-                type="material"
-                onPress={() => {
-                  if (managingVoice && recording) {
-                    const recordingUri = `${managingVoice.dir}/${numbersDir}${i}.${recording.getURI()?.split(".").pop()}`;
-                    stopRecording(recording, recordingUri);
+              {!recording && (
+                <Icon
+                  testID={"play" + i}
+                  name="play-arrow"
+                  type="material"
+                  onPress={() => {
+                    if (managingVoice) play(managingVoice.numberRecordings[i]);
+                  }}
+                />
+              )}
+              {recording && (
+                <Icon
+                  testID={"stop" + i}
+                  name="stop"
+                  type="material"
+                  onPress={() => {
+                    if (managingVoice && recording) {
+                      const recordingUri = `${managingVoice.dir}/${numbersDir}${i}.${recording.getURI()?.split(".").pop()}`;
+                      stopRecording(recording, recordingUri);
 
-                    const recordings = { ...managingVoice.numberRecordings };
-                    recordings[i] = recordingUri;
-                    dispatch(
-                      updateVoice({
-                        ...managingVoice,
-                        numberRecordings: recordings,
-                      }),
-                    );
-                  }
-                }}
-              />
-              <Icon
-                testID={"mic" + i}
-                name="mic"
-                type="material"
-                onPress={async () => {
-                  setRecording(await startRecording());
-                }}
-              />
+                      const recordings = { ...managingVoice.numberRecordings };
+                      recordings[i] = recordingUri;
+                      dispatch(
+                        updateVoice({
+                          ...managingVoice,
+                          numberRecordings: recordings,
+                        }),
+                      );
+                      setRecording(null);
+                    }
+                  }}
+                />
+              )}
+              {!recording && (
+                <Icon
+                  testID={"mic" + i}
+                  name="mic"
+                  type="material"
+                  onPress={async () => {
+                    setRecording(await startRecording());
+                  }}
+                />
+              )}
             </ListItem>
           ))}
       </ScrollView>
