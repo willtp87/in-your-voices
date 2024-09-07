@@ -43,16 +43,19 @@ export default function Page() {
               <ListItem.Content>
                 <ListItem.Title>{i}</ListItem.Title>
               </ListItem.Content>
-              {!recording && (
-                <Icon
-                  testID={"play" + i}
-                  name="play-arrow"
-                  type="material"
-                  onPress={() => {
-                    if (managingVoice) play(managingVoice.numberRecordings[i]);
-                  }}
-                />
-              )}
+              {!recording &&
+                managingVoice?.numberRecordings &&
+                i in managingVoice.numberRecordings && (
+                  <Icon
+                    testID={"play" + i}
+                    name="play-arrow"
+                    type="material"
+                    onPress={() => {
+                      if (managingVoice)
+                        play(managingVoice.numberRecordings[i]);
+                    }}
+                  />
+                )}
               {recording && (
                 <Icon
                   testID={"stop" + i}
