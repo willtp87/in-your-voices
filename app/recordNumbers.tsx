@@ -21,6 +21,7 @@ export default function Page() {
   const max = useAppSelector(selectMax);
   const numbersDir = useAppSelector(selectDir);
   const [recording, setRecording] = useState<Audio.Recording | null>();
+  const [activeRecording, setActiveRecording] = useState<number | null>();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export default function Page() {
                     }}
                   />
                 )}
-              {recording && (
+              {recording && activeRecording === i && (
                 <Icon
                   testID={"stop" + i}
                   name="stop"
@@ -86,6 +87,7 @@ export default function Page() {
                   type="material"
                   onPress={async () => {
                     setRecording(await startRecording());
+                    setActiveRecording(i);
                   }}
                 />
               )}
