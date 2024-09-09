@@ -7,7 +7,7 @@ import { createVoice } from "../../store/voices";
 import { setManagingVoice } from "../../store/voicesSlice";
 import RecordNumbers from "../recordNumbers";
 describe("<RecordNumbers />", () => {
-  it("uses a voice with no records", async () => {
+  it("uses a voice", async () => {
     /**
      * @xxx Running into testing problems with recordings.
      * Failed to start recording TypeError: Cannot read properties of undefined (reading 'uri')
@@ -21,7 +21,7 @@ describe("<RecordNumbers />", () => {
       dir: "./voices/0",
       title: "title",
       desc: "desc",
-      numberRecordings: {},
+      numberRecordings: { 1: "tst" },
     };
     dispatch(createVoice());
     act(() => {
@@ -34,6 +34,7 @@ describe("<RecordNumbers />", () => {
     );
     screen.getByTestId("mic0");
     screen.getByTestId("mic9");
+    screen.getByTestId("play1");
     screen.getByText("desc");
     expect(await screen.queryByTestId("stop0")).toBeFalsy();
     expect(await screen.queryByTestId("play0")).toBeFalsy();
