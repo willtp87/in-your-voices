@@ -4,10 +4,10 @@ import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import "../i18n/i18n";
 import { useTranslation } from "react-i18next";
-import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import TimeInApp from "../components/TimeInApp";
+import VoiceSelect from "../components/VoiceSelect";
 
 // Main app screen.
 export default function Index() {
@@ -20,8 +20,9 @@ export default function Index() {
   }, [t, navigation]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <StatusBar style="auto" />
+      <VoiceSelect />
       <Button
         testID="numbers"
         title={t("numbersTitle")}
@@ -37,11 +38,3 @@ export default function Index() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
