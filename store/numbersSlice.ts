@@ -8,12 +8,14 @@ import { numbersDir } from "./voices";
 // Typing for `state`.
 interface numbersState {
   value: number;
+  min: number;
   max: number;
   dir: string;
 }
 const initialState: numbersState = {
   value: 0,
   max: 10,
+  min: 0,
   dir: numbersDir,
 };
 
@@ -38,5 +40,6 @@ export const numbersSlice = createSlice({
 export const { increment, decrement, reset } = numbersSlice.actions;
 export const selectCount = (state: RootState) => state.numbers.value;
 export const selectMax = (state: RootState) => state.numbers.max;
+export const selectMin = (state: RootState) => state.numbers.min;
 export const selectDir = (state: RootState) => state.numbers.dir;
 export default numbersSlice.reducer;
