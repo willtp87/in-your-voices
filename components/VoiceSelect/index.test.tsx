@@ -12,6 +12,6 @@ describe("<VoiceSelect />", () => {
         <VoiceSelect />
       </Provider>,
     );
-    expect(screen.getByText("Voice:"));
+    expect(await screen.findByText("Voice:"));
   });
 });
