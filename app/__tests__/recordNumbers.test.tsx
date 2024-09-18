@@ -33,7 +33,7 @@ describe("<RecordNumbers />", () => {
       </Provider>,
     );
     screen.getByTestId("mic0");
-    screen.getByTestId("mic9");
+    screen.getByTestId("mic10");
     screen.getByTestId("play1");
     screen.getByText("desc");
     expect(await screen.queryByTestId("stop0")).toBeFalsy();

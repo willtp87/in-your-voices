@@ -37,7 +37,7 @@ export default function Page() {
       <Text>{managingVoice?.title}</Text>
       <Text>{managingVoice?.desc}</Text>
       <ScrollView>
-        {Array(max)
+        {Array(max + 1)
           .fill(null)
           .map((value, i) => (
             <ListItem key={i} bottomDivider>
