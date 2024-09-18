@@ -6,6 +6,7 @@ import VoiceSelect from ".";
 import { store } from "../../store";
 
 describe("<VoiceSelect />", () => {
+  // Picker doesn't render during tests.
   it("renders", async () => {
     render(
       <Provider store={store}>
