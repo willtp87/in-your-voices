@@ -7,9 +7,11 @@ import type { RootState } from ".";
 // Typing for `state`.
 interface settingsState {
   darkTheme: boolean;
+  autoPlay: boolean;
 }
 const initialState: settingsState = {
   darkTheme: true,
+  autoPlay: true,
 };
 
 // Slice definition.
@@ -20,10 +22,13 @@ export const settingsSlice = createSlice({
     switchDarkTheme: (state) => {
       state.darkTheme = !state.darkTheme;
     },
+    switchAutoPlay: (state) => {
+      state.autoPlay = !state.autoPlay;
+    },
   },
 });
 
 // Exports.
-export const { switchDarkTheme } = settingsSlice.actions;
+export const { switchDarkTheme, switchAutoPlay } = settingsSlice.actions;
 export const selectSettings = (state: RootState) => state.settings;
 export default settingsSlice.reducer;

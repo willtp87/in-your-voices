@@ -3,6 +3,7 @@
     "timeInApp": "Temps passé dans l'application: {{timeInApp}}",
     "settingsTitle": "Paramètres",
     "darkMode": "Mode sombre:",
+    "autoplay": "Lecture Automatique:",
     "numbersTitle": "Nombres",
     "voicesTitle": "Voix",
     "voiceTitle": "Voix",

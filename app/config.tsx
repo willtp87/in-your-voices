@@ -6,7 +6,11 @@ import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { switchDarkTheme, selectSettings } from "../store/settingsSlice";
+import {
+  switchDarkTheme,
+  selectSettings,
+  switchAutoPlay,
+} from "../store/settingsSlice";
 
 import "../i18n/i18n";
 
@@ -34,6 +38,13 @@ export default function Page() {
           value={settings.darkTheme}
           onValueChange={(value) => {
             dispatch(switchDarkTheme());
+          }}
+        />
+        <Text>{t("autoplay")}</Text>
+        <Switch
+          value={settings.autoPlay}
+          onValueChange={(value) => {
+            dispatch(switchAutoPlay());
           }}
         />
         <Button

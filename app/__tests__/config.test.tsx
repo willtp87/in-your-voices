@@ -7,13 +7,14 @@ import { store } from "../../store";
 import Config from "../config";
 
 describe("<Config />", () => {
-  it("has dark mode", () => {
+  it("has configs", () => {
     render(
       <Provider store={store}>
         <Config />
       </Provider>,
     );
     expect(screen.getByText("Dark mode:"));
+    expect(screen.getByText("Autoplay:"));
   });
   it("can navigate to voices", async () => {
     const user = userEvent.setup();

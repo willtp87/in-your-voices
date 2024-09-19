@@ -8,6 +8,6 @@ You can:
 * Edit Voices
   * Title
   * Description
-* Navigate to the voice screen to make recordings.
 * Delete Voices
   * There is a confirmation modal.
+* Navigate to the voice screen to make recordings.
