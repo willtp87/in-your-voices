@@ -60,6 +60,11 @@ export default function Page() {
               type="material"
               onPress={() => {
                 dispatch(setManagingVoice(voice));
+
+                // If we don't set these the last edited vals will be used.
+                setTitle(voice?.title ?? "");
+                setDesc(voice?.desc ?? "");
+
                 setMetaDataVisible(true);
               }}
             />
