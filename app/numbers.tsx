@@ -1,3 +1,4 @@
+import { Icon } from "@rneui/themed";
 import { useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -61,7 +62,21 @@ export default function Page() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Icon
+        testID="prev"
+        name="skip-previous"
+        type="material"
+        onPress={() => {}}
+        style={{ flex: 1, justifyContent: "center" }}
+      />
       <Number num={num} word={t(`numbers.${num}`)} />
+      <Icon
+        testID="prev"
+        name="skip-next"
+        type="material"
+        onPress={() => {}}
+        style={{ flex: 1, justifyContent: "center" }}
+      />
     </SafeAreaView>
   );
 }
@@ -69,6 +84,7 @@ export default function Page() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "row",
     justifyContent: "center",
   },
 });
