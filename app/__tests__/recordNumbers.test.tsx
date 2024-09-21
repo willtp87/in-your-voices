@@ -36,7 +36,7 @@ describe("<RecordNumbers />", () => {
     screen.getByTestId("mic10");
     screen.getByTestId("play1");
     screen.getByText("desc");
-    expect(await screen.queryByTestId("stop0")).toBeFalsy();
-    expect(await screen.queryByTestId("play0")).toBeFalsy();
+    expect(screen.queryByTestId("stop0")).toBeFalsy();
+    expect(screen.queryByTestId("play0")).toBeFalsy();
   });
 });

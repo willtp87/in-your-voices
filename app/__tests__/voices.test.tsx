@@ -46,8 +46,8 @@ describe("<Voices />", () => {
     await user.type(screen.getByTestId("title"), "testTitle");
     await user.type(screen.getByTestId("description"), "testdesc");
     await user.press(screen.getByText("Save"));
-    expect(await screen.queryByText("1")).toBeFalsy();
-    expect(await screen.getByText("testTitle"));
+    expect(screen.queryByText("1")).toBeFalsy();
+    expect(screen.getByText("testTitle"));
   });
   it("can navigate to a voice", async () => {
     const user = userEvent.setup();
