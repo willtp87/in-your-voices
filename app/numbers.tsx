@@ -15,6 +15,7 @@ import {
   selectMax,
   selectMin,
 } from "../store/numbersSlice";
+import { selectSettings } from "../store/settingsSlice";
 import { selectActiveVoice } from "../store/voicesSlice";
 
 import "../i18n/i18n";
@@ -26,12 +27,16 @@ export default function Page() {
   const num = useAppSelector(selectCount);
   const max = useAppSelector(selectMax);
   const min = useAppSelector(selectMin);
+  const settings = useAppSelector(selectSettings);
   const dispatch = useAppDispatch();
   const activeVoice = useAppSelector(selectActiveVoice);
   const [init, setInit] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      // Do nothing on timer if autoplay disabled.
+      if (!settings.autoPlay) return;
+
       // Increment and play sound if available.
       if (num >= max) {
         dispatch(reset());
@@ -47,7 +52,7 @@ export default function Page() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [num, max, min, dispatch, activeVoice]);
+  }, [num, max, min, dispatch, activeVoice, settings.autoPlay]);
 
   useEffect(() => {
     navigation.setOptions({ title: t("numbersTitle") });
@@ -62,21 +67,25 @@ export default function Page() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Icon
-        testID="prev"
-        name="skip-previous"
-        type="material"
-        onPress={() => {}}
-        style={{ flex: 1, justifyContent: "center" }}
-      />
+      {!settings.autoPlay && (
+        <Icon
+          testID="prev"
+          name="skip-previous"
+          type="material"
+          onPress={() => {}}
+          style={{ flex: 1, justifyContent: "center" }}
+        />
+      )}
       <Number num={num} word={t(`numbers.${num}`)} />
-      <Icon
-        testID="prev"
-        name="skip-next"
-        type="material"
-        onPress={() => {}}
-        style={{ flex: 1, justifyContent: "center" }}
-      />
+      {!settings.autoPlay && (
+        <Icon
+          testID="next"
+          name="skip-next"
+          type="material"
+          onPress={() => {}}
+          style={{ flex: 1, justifyContent: "center" }}
+        />
+      )}
     </SafeAreaView>
   );
 }
