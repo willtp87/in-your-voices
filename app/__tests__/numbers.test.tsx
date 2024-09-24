@@ -21,7 +21,8 @@ describe("<Numbers />", () => {
 
     // Verify next/prev are present.
     expect(screen.getByTestId("next"));
-    expect(screen.getByTestId("prev"));
+    expect(screen.queryByTestId("prev")).toBeFalsy();
+    // @todo go to next and verify previous exists.
 
     // Verify we do not auto increment.
     act(() => {

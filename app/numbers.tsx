@@ -1,6 +1,6 @@
 import { Icon } from "@rneui/themed";
 import { useNavigation } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -32,27 +32,32 @@ export default function Page() {
   const activeVoice = useAppSelector(selectActiveVoice);
   const [init, setInit] = useState(true);
 
+  // Change position in playlist.
+  const next = useCallback(() => {
+    // Increment and play sound if available.
+    if (num >= max) {
+      dispatch(reset());
+      if (activeVoice && min in activeVoice?.numberRecordings) {
+        play(activeVoice.numberRecordings[min]);
+      }
+      return;
+    }
+    if (activeVoice && num in activeVoice?.numberRecordings) {
+      play(activeVoice.numberRecordings[num + 1]);
+    }
+    dispatch(increment());
+  }, [num, max, min, dispatch, activeVoice]);
+  const prev = () => {};
+
   useEffect(() => {
     const interval = setInterval(() => {
       // Do nothing on timer if autoplay disabled.
       if (!settings.autoPlay) return;
-
-      // Increment and play sound if available.
-      if (num >= max) {
-        dispatch(reset());
-        if (activeVoice && min in activeVoice?.numberRecordings) {
-          play(activeVoice.numberRecordings[min]);
-        }
-        return;
-      }
-      if (activeVoice && num in activeVoice?.numberRecordings) {
-        play(activeVoice.numberRecordings[num + 1]);
-      }
-      dispatch(increment());
+      next();
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [num, max, min, dispatch, activeVoice, settings.autoPlay]);
+  }, [num, max, min, dispatch, activeVoice, settings.autoPlay, next]);
 
   useEffect(() => {
     navigation.setOptions({ title: t("numbersTitle") });
@@ -67,12 +72,12 @@ export default function Page() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {!settings.autoPlay && (
+      {!settings.autoPlay && !(num === min) && (
         <Icon
           testID="prev"
           name="skip-previous"
           type="material"
-          onPress={() => {}}
+          onPress={prev}
           style={{ flex: 1, justifyContent: "center" }}
         />
       )}
@@ -82,7 +87,7 @@ export default function Page() {
           testID="next"
           name="skip-next"
           type="material"
-          onPress={() => {}}
+          onPress={next}
           style={{ flex: 1, justifyContent: "center" }}
         />
       )}
