@@ -23,7 +23,7 @@ describe("<Numbers />", () => {
     // Verify next/prev are present.
     expect(screen.getByTestId("next"));
     expect(screen.queryByTestId("prev")).toBeFalsy();
-    
+
     // Go to next and verify previous exists.
     await user.press(screen.getByTestId("next"));
     expect(screen.getByTestId("prev"));
