@@ -9,6 +9,7 @@ import Number from "../components/Number";
 import { play } from "../lib/sound";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import {
+  decrement,
   increment,
   reset,
   selectCount,
@@ -47,7 +48,13 @@ export default function Page() {
     }
     dispatch(increment());
   }, [num, max, min, dispatch, activeVoice]);
-  const prev = () => {};
+  const prev = useCallback(() => {
+    // Decrement and play sound if available.
+    if (activeVoice && num in activeVoice?.numberRecordings) {
+      play(activeVoice.numberRecordings[num - 1]);
+    }
+    dispatch(decrement());
+  }, [num, dispatch, activeVoice]);
 
   useEffect(() => {
     const interval = setInterval(() => {

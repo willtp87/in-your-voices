@@ -1,4 +1,4 @@
-import { render, screen, act } from "@testing-library/react-native";
+import { render, screen, act, userEvent } from "@testing-library/react-native";
 import React from "react";
 import { Provider } from "react-redux";
 
@@ -8,7 +8,8 @@ import { switchAutoPlay } from "../../store/settingsSlice";
 import Numbers from "../numbers";
 
 describe("<Numbers />", () => {
-  it("respects autoplay off", () => {
+  it("respects autoplay off", async () => {
+    const user = userEvent.setup();
     const dispatch = store.dispatch;
     if (store.getState().settings.autoPlay) dispatch(switchAutoPlay());
     dispatch(reset());
@@ -22,9 +23,13 @@ describe("<Numbers />", () => {
     // Verify next/prev are present.
     expect(screen.getByTestId("next"));
     expect(screen.queryByTestId("prev")).toBeFalsy();
-    // @todo go to next and verify previous exists.
+    
+    // Go to next and verify previous exists.
+    await user.press(screen.getByTestId("next"));
+    expect(screen.getByTestId("prev"));
 
     // Verify we do not auto increment.
+    await user.press(screen.getByTestId("prev"));
     act(() => {
       jest.advanceTimersByTime(5000);
     });
