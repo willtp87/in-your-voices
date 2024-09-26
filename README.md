@@ -9,6 +9,14 @@ An IOS app that helps you teach your child with your voices.
 * [Configuration](./docs/config.md)
 * [Voices](./docs/voices.md)
 
+### Data Export
+
+The data stored in this app may be of great sentimental value. It can be exported by accessing the files through normal means:
+
+* macOS: finder
+* Windows: itunes
+* linux: libimobiledevice
+
 ## Disclaimer
 
 This app was built to help one family. Its author is a software developer and not a child educator.
