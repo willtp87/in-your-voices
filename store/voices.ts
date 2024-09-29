@@ -6,15 +6,15 @@ import { forceCreateDir } from "../lib/files";
 // Voice CRUD.
 // Filename for voice data.
 const voiceJsonBasename = "/voice.json";
-interface recordings {
-  [index: number]: string;
+export interface recordingsInterface {
+  [index: string]: string;
 }
 // Typing for `state`.
 export interface voice {
   dir: string;
   title: string | null;
   desc: string | null;
-  numberRecordings: recordings;
+  numberRecordings: recordingsInterface;
 }
 
 // Directory constants.
