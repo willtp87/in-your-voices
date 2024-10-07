@@ -22,7 +22,7 @@ describe("<Recorder />", () => {
     render(
       <Provider store={store}>
         <Recorder
-          recordings={{ z: "z" }}
+          recordings={[{ machineName: "x", label: "y", recording: "z" }]}
           recordingsType="x"
           recordingsDir="y"
         />

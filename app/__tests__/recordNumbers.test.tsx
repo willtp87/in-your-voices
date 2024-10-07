@@ -21,7 +21,7 @@ describe("<RecordNumbers />", () => {
       dir: "./voices/0",
       title: "title",
       desc: "desc",
-      numberRecordings: { 1: "tst" },
+      numberRecordings: [{ machineName: "0", label: "tst", recording: "tst" }],
     };
     dispatch(createVoice());
     act(() => {
@@ -34,9 +34,10 @@ describe("<RecordNumbers />", () => {
     );
     screen.getByTestId("mic0");
     screen.getByTestId("mic10");
-    screen.getByTestId("play1");
+    screen.getByTestId("play0");
     screen.getByText("desc");
+    screen.getByText("5");
     expect(screen.queryByTestId("stop0")).toBeFalsy();
-    expect(screen.queryByTestId("play0")).toBeFalsy();
+    expect(screen.queryByTestId("play1")).toBeFalsy();
   });
 });

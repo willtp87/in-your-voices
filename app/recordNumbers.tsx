@@ -28,16 +28,24 @@ export default function Page() {
   }, [t, navigation, managingVoice]);
 
   // Generate recordings list if none found and expanding if max changes.
-  const emptyRecordings = [...Array(max + 1).keys()].reduce(
-    (o, key) => ({ ...o, [key]: "" }),
-    {},
-  );
-  const presentRecordings =
-    managingVoice?.[recordingsType as keyof voice] ?? {};
-  const recordings =
-    typeof presentRecordings === "object"
-      ? { ...emptyRecordings, ...presentRecordings }
-      : emptyRecordings;
+  let presentRecordings = managingVoice?.[recordingsType as keyof voice] ?? [];
+  if (!Array.isArray(presentRecordings)) presentRecordings = [];
+  const missingEntries = Array(max + 1 - presentRecordings.length)
+    .fill(null)
+    .map((entry, i) => {
+      return {
+        machineName: `${i + presentRecordings.length}`,
+        recording: "",
+      };
+    });
+  const recordings = missingEntries
+    ? presentRecordings.concat(missingEntries)
+    : presentRecordings;
+  // Make sure all entries have a label.
+  const recordingsList = recordings.map((rec, i) => ({
+    ...rec,
+    label: `${i}`,
+  }));
 
   return (
     <SafeAreaView
@@ -46,7 +54,7 @@ export default function Page() {
       }}
     >
       <Recorder
-        recordings={recordings}
+        recordings={recordingsList}
         recordingsType={recordingsType}
         recordingsDir={numbersDir}
       />

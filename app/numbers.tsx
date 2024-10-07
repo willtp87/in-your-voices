@@ -39,19 +39,19 @@ export default function Page() {
     if (num >= max) {
       dispatch(reset());
       if (activeVoice && min in activeVoice?.numberRecordings) {
-        play(activeVoice.numberRecordings[min]);
+        play(activeVoice.numberRecordings[min].recording);
       }
       return;
     }
     if (activeVoice && num in activeVoice?.numberRecordings) {
-      play(activeVoice.numberRecordings[num + 1]);
+      play(activeVoice.numberRecordings[num + 1].recording);
     }
     dispatch(increment());
   }, [num, max, min, dispatch, activeVoice]);
   const prev = useCallback(() => {
     // Decrement and play sound if available.
     if (activeVoice && num in activeVoice?.numberRecordings) {
-      play(activeVoice.numberRecordings[num - 1]);
+      play(activeVoice.numberRecordings[num - 1].recording);
     }
     dispatch(decrement());
   }, [num, dispatch, activeVoice]);
@@ -72,7 +72,7 @@ export default function Page() {
     if (init) {
       setInit(false);
       if (activeVoice && min === num && min in activeVoice?.numberRecordings) {
-        play(activeVoice.numberRecordings[min]);
+        play(activeVoice.numberRecordings[min].recording);
       }
     }
   }, [t, navigation, min, num, activeVoice, init]);

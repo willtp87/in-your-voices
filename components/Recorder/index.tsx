@@ -5,8 +5,15 @@ import { ScrollView } from "react-native";
 
 import { play, startRecording, stopRecording } from "../../lib/sound";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { updateVoice, recordingsInterface } from "../../store/voices";
+import { updateVoice } from "../../store/voices";
 import { selectManagingVoice } from "../../store/voicesSlice";
+
+// recordingsInterface with a label.
+export interface recordingsListInterface {
+  machineName: string;
+  recording: string;
+  label: string | null;
+}
 
 // Component to record a set.
 export default function Recorder({
@@ -14,7 +21,7 @@ export default function Recorder({
   recordingsType,
   recordingsDir,
 }: {
-  recordings: recordingsInterface;
+  recordings: recordingsListInterface[];
   recordingsType: string;
   recordingsDir: string;
 }) {
@@ -29,18 +36,18 @@ export default function Recorder({
     <ScrollView>
       <Text>{managingVoice?.title}</Text>
       <Text>{managingVoice?.desc}</Text>
-      {Object.entries(recordings).map((value, i) => (
+      {recordings.map((recordingVal, i) => (
         <ListItem key={i} bottomDivider>
           <ListItem.Content>
-            <ListItem.Title>{i}</ListItem.Title>
+            <ListItem.Title>{recordingVal.label}</ListItem.Title>
           </ListItem.Content>
-          {!recording && i in recordings && recordings[i] && (
+          {!recording && recordingVal.recording && (
             <Icon
               testID={"play" + i}
               name="play-arrow"
               type="material"
               onPress={() => {
-                if (managingVoice) play(recordings[i]);
+                if (managingVoice) play(recordingVal.recording);
               }}
             />
           )}
@@ -54,11 +61,14 @@ export default function Recorder({
                   const recordingUri = `${managingVoice.dir}/${recordingsDir}${i}.${recording.getURI()?.split(".").pop()}`;
                   stopRecording(recording, recordingUri);
 
-                  recordings[i] = recordingUri;
+                  recordingVal.recording = recordingUri;
                   dispatch(
                     updateVoice({
                       ...managingVoice,
-                      [recordingsType]: recordings,
+                      [recordingsType]: recordings.map((val) => {
+                        const { label, ...rec } = val;
+                        return rec;
+                      }),
                     }),
                   );
                   setRecording(null);

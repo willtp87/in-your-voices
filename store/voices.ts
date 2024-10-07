@@ -7,14 +7,15 @@ import { forceCreateDir } from "../lib/files";
 // Filename for voice data.
 const voiceJsonBasename = "/voice.json";
 export interface recordingsInterface {
-  [index: string]: string;
+  machineName: string;
+  recording: string;
 }
 // Typing for `state`.
 export interface voice {
   dir: string;
   title: string | null;
   desc: string | null;
-  numberRecordings: recordingsInterface;
+  numberRecordings: recordingsInterface[];
 }
 
 // Directory constants.
@@ -33,7 +34,7 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
           dir: voicesDir + voiceDir,
           title: null,
           desc: null,
-          numberRecordings: {},
+          numberRecordings: [],
         };
         try {
           voiceVals = JSON.parse(
@@ -80,7 +81,7 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
     dir: voiceDir,
     title: null,
     desc: null,
-    numberRecordings: {},
+    numberRecordings: [],
   };
   writeVoiceJson(voice);
 
