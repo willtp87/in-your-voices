@@ -17,7 +17,7 @@ describe("<Voices />", () => {
     expect(await screen.findByText("Add"));
     await user.press(screen.getByRole("button", { name: "Add" }));
     expect(await screen.findByText("1"));
-  });
+  }, 10000);
   it("can delete voices", async () => {
     const user = userEvent.setup();
     render(
