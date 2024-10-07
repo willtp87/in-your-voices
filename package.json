@@ -22,7 +22,7 @@
     "expo-file-system": "^17.0.1",
     "expo-linking": "~6.3.1",
     "expo-localization": "^15.0.3",
-    "expo-modules-autolinking": "^1.11.1",
+    "expo-modules-autolinking": "^1.11.3",
     "expo-modules-core": "^1.12.23",
     "expo-router": "~3.5.23",
     "expo-status-bar": "~1.12.1",
