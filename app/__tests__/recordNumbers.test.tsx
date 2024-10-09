@@ -32,11 +32,11 @@ describe("<RecordNumbers />", () => {
         <RecordNumbers />
       </Provider>,
     );
-    screen.getByTestId("mic0");
-    screen.getByTestId("mic10");
-    screen.getByTestId("play0");
-    screen.getByText("desc");
-    screen.getByText("5");
+    expect(screen.getByTestId("mic0"));
+    expect(screen.getByTestId("mic10"));
+    expect(screen.getByTestId("play0"));
+    expect(screen.getByText("desc"));
+    expect(screen.getByText("5"));
     expect(screen.queryByTestId("stop0")).toBeFalsy();
     expect(screen.queryByTestId("play1")).toBeFalsy();
   });

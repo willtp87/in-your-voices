@@ -29,7 +29,7 @@ describe("<Recorder />", () => {
       </Provider>,
     );
 
-    screen.getByTestId("mic0");
-    screen.getByText("desc");
+    expect(screen.getByTestId("mic0"));
+    expect(screen.getByText("desc"));
   });
 });
