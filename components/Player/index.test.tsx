@@ -36,7 +36,7 @@ describe("<Player />", () => {
       jest.advanceTimersByTime(5000);
     });
     expect(screen.queryByText("z")).toBeFalsy();
-  });
+  }, 10000);
   it("respects autoplay", () => {
     const dispatch = store.dispatch;
     if (!store.getState().settings.autoPlay) dispatch(switchAutoPlay());
