@@ -15,6 +15,7 @@ describe("<Config />", () => {
     );
     expect(screen.getByText("Dark mode:"));
     expect(screen.getByText("Autoplay:"));
+    expect(screen.getByText("Shuffle:"));
     expect(screen.getByText("Documentation"));
   });
   it("can navigate to voices", async () => {

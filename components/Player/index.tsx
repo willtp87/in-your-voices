@@ -2,6 +2,7 @@ import { Icon } from "@rneui/themed";
 import React, { useCallback, useEffect, useState, ReactNode } from "react";
 import { View, StyleSheet } from "react-native";
 
+import { shuffleArray } from "../../lib/datastructures";
 import { play } from "../../lib/sound";
 import { useAppSelector } from "../../store/hooks";
 import { selectSettings } from "../../store/settingsSlice";
@@ -60,15 +61,18 @@ export default function Player({
     return () => clearInterval(interval);
   }, [position, activeVoice, settings.autoPlay, next]);
 
-  // Play on first load.
+  // On first load.
   useEffect(() => {
     if (init) {
       setInit(false);
+      // Play.
       if (activeVoice && position === 0 && 0 in playlist) {
         if (playlist[position].recording) play(playlist[position].recording);
       }
+      // Shuffle
+      if (settings.shuffle) shuffleArray(playlist);
     }
-  }, [position, activeVoice, init, playlist]);
+  }, [position, activeVoice, init, playlist, settings]);
 
   return (
     <View style={styles.container}>

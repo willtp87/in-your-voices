@@ -10,6 +10,7 @@ import {
   switchDarkTheme,
   selectSettings,
   switchAutoPlay,
+  switchShuffle,
 } from "../store/settingsSlice";
 
 import "../i18n/i18n";
@@ -45,6 +46,13 @@ export default function Page() {
           value={settings.autoPlay}
           onValueChange={(value) => {
             dispatch(switchAutoPlay());
+          }}
+        />
+        <Text>{t("shuffle")}</Text>
+        <Switch
+          value={settings.shuffle}
+          onValueChange={(value) => {
+            dispatch(switchShuffle());
           }}
         />
         <Button

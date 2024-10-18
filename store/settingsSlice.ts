@@ -8,10 +8,12 @@ import type { RootState } from ".";
 interface settingsState {
   darkTheme: boolean;
   autoPlay: boolean;
+  shuffle: boolean;
 }
 const initialState: settingsState = {
   darkTheme: true,
   autoPlay: true,
+  shuffle: false,
 };
 
 // Slice definition.
@@ -25,10 +27,14 @@ export const settingsSlice = createSlice({
     switchAutoPlay: (state) => {
       state.autoPlay = !state.autoPlay;
     },
+    switchShuffle: (state) => {
+      state.shuffle = !state.shuffle;
+    },
   },
 });
 
 // Exports.
-export const { switchDarkTheme, switchAutoPlay } = settingsSlice.actions;
+export const { switchDarkTheme, switchAutoPlay, switchShuffle } =
+  settingsSlice.actions;
 export const selectSettings = (state: RootState) => state.settings;
 export default settingsSlice.reducer;
