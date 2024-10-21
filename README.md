@@ -19,7 +19,7 @@ The data stored in this app may be of great sentimental value. It can be exporte
 
 ## Contribute
 
-This is an open source project you can help or contribute to [Patreon](https://www.patreon.com/WilliamPanting).
+This is an open source project you can help develop it or contribute to [Patreon](https://www.patreon.com/WilliamPanting).
 
 ## Disclaimer
 
