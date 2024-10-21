@@ -17,6 +17,10 @@ The data stored in this app may be of great sentimental value. It can be exporte
 * Windows: itunes
 * linux: libimobiledevice
 
+## Contribute
+
+This is an open source project you can help or contribute to [Patreon](https://www.patreon.com/WilliamPanting).
+
 ## Disclaimer
 
 This app was built to help one family. Its author is a software developer and not a child educator.
