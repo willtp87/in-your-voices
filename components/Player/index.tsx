@@ -81,6 +81,7 @@ export default function Player({
           testID="prev"
           name="skip-previous"
           type="material"
+          size={40}
           onPress={prev}
           style={{ flex: 1, justifyContent: "center" }}
         />
@@ -91,6 +92,7 @@ export default function Player({
           testID="next"
           name="skip-next"
           type="material"
+          size={40}
           onPress={next}
           style={{ flex: 1, justifyContent: "center" }}
         />
