@@ -6,7 +6,7 @@ import Letter from ".";
 describe("<Letter />", () => {
   it("has expected text", () => {
     render(<Letter char="d" word="dee" />);
-    expect(screen.getByText("d|D"));
+    expect(screen.getByText("d | D"));
     expect(screen.getByText("dee"));
   });
 });
