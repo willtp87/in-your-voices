@@ -76,13 +76,14 @@ export default function Player({
 
   return (
     <View style={styles.container}>
-      {!settings.autoPlay && !(position === 0) && (
+      {!settings.autoPlay && (
         <Icon
           testID="prev"
           name="skip-previous"
           type="material"
           size={40}
           onPress={prev}
+          disabled={position === 0}
           style={{ flex: 1, justifyContent: "center" }}
         />
       )}

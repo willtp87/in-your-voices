@@ -25,7 +25,7 @@ describe("<Player />", () => {
     screen.getByText("c");
     // Verify next/prev are present.
     expect(screen.getByTestId("next"));
-    expect(screen.queryByTestId("prev")).toBeFalsy();
+    expect(screen.queryByTestId("prev"));
     // Go to next and verify previous exists.
     await user.press(screen.getByTestId("next"));
     expect(screen.getByTestId("prev"));
