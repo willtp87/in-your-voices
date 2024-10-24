@@ -5,25 +5,16 @@ import { Provider } from "react-redux";
 import { store } from "../../store";
 import { createVoice } from "../../store/voices";
 import { setManagingVoice } from "../../store/voicesSlice";
-import RecordNumbers from "../recordNumbers";
+import RecordLetters from "../recordLetters";
 
-describe("<RecordNumbers />", () => {
+describe("<RecordLetters />", () => {
   it("uses a voice", async () => {
-    /**
-     * @xxx Running into testing problems with recordings.
-     * Failed to start recording TypeError: Cannot read properties of undefined (reading 'uri')
-     *  at Recording.uri (/home/wpanting/rn-dev/in-your-voices/node_modules/expo-av/src/Audio/Recording.ts:327:9)
-     *  at Generator.next (<anonymous>)
-     *  at asyncGeneratorStep (/home/wpanting/rn-dev/in-your-voices/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
-     *  at _next (/home/wpanting/rn-dev/in-your-voices/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
-     */
     const dispatch = store.dispatch;
     const voice = {
       dir: "./voices/0",
       title: "title",
       desc: "desc",
       numberRecordings: [{ machineName: "0", label: "tst", recording: "tst" }],
-      letterRecordings: [{ machineName: "a", label: "A", recording: "tst" }],
     };
     dispatch(createVoice());
     act(() => {
@@ -31,14 +22,13 @@ describe("<RecordNumbers />", () => {
     });
     render(
       <Provider store={store}>
-        <RecordNumbers />
+        <RecordLetters />
       </Provider>,
     );
     expect(screen.getByTestId("mic0"));
     expect(screen.getByTestId("mic10"));
-    expect(screen.getByTestId("play0"));
     expect(screen.getByText("desc"));
-    expect(screen.getByText("5"));
+    expect(screen.getByText("A"));
     expect(screen.queryByTestId("stop0")).toBeFalsy();
     expect(screen.queryByTestId("play1")).toBeFalsy();
   });

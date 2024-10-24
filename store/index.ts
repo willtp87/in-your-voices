@@ -12,6 +12,7 @@ import {
   REGISTER,
 } from "redux-persist";
 
+import lettersReducer from "./lettersSlice";
 import numbersReducer from "./numbersSlice";
 import settingsReducer from "./settingsSlice";
 import timeInAppReducer from "./timeInAppSlice";
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   timeInApp: timeInAppReducer,
   settings: settingsReducer,
   numbers: numbersReducer,
+  letters: lettersReducer,
   voices: voicesReducer,
 });
 

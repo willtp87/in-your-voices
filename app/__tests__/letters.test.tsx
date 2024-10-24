@@ -4,22 +4,22 @@ import { Provider } from "react-redux";
 
 import { store } from "../../store";
 import { switchAutoPlay } from "../../store/settingsSlice";
-import Numbers from "../numbers";
+import Letters from "../letters";
 
-describe("<Numbers />", () => {
+describe("<Letters />", () => {
   it("uses first increment", async () => {
     const user = userEvent.setup();
     const dispatch = store.dispatch;
     if (store.getState().settings.autoPlay) dispatch(switchAutoPlay());
     render(
       <Provider store={store}>
-        <Numbers />
+        <Letters />
       </Provider>,
     );
-    expect(screen.getByText("0"));
+    expect(screen.getByText("a"));
 
     // Go to next and verify increment.
     await user.press(screen.getByTestId("next"));
-    expect(screen.getByText("1"));
+    expect(screen.getByText("bee"));
   });
 });

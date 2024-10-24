@@ -35,4 +35,18 @@ describe("<Index />", () => {
     await user.press(screen.getByTestId("numbers"));
     expect(screen).toHavePathname("/numbers");
   });
+  it("can navigate to letters", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Index />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("letters"));
+    expect(screen).toHavePathname("/letters");
+  });
 });

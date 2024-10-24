@@ -21,4 +21,18 @@ describe("<Voice />", () => {
     await user.press(screen.getByTestId("numbers"));
     expect(screen).toHavePathname("/recordNumbers");
   });
+  it("can navigate to recordLetters", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Voice />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("letters"));
+    expect(screen).toHavePathname("/recordLetters");
+  });
 });

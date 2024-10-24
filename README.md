@@ -6,6 +6,7 @@ An IOS app that helps you teach your child with your voices.
 ## App Docs
 
 * [Numbers](./docs/numbers.md)
+* [Letters](./docs/letters.md)
 * [Configuration](./docs/config.md)
 * [Voices](./docs/voices.md)
 

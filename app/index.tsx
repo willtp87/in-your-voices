@@ -28,6 +28,11 @@ export default function Index() {
         title={t("numbersTitle")}
         onPress={() => router.push("/numbers")}
       />
+      <Button
+        testID="letters"
+        title={t("lettersTitle")}
+        onPress={() => router.push("/letters")}
+      />
       <TimeInApp />
       <Icon
         testID="config"

@@ -4,36 +4,31 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Number from "../components/Number";
+import Letter from "../components/Letter";
 import Player from "../components/Player";
 import { useAppSelector } from "../store/hooks";
-import { selectMax } from "../store/numbersSlice";
+import { selectLetters } from "../store/lettersSlice";
 import { selectActiveVoice } from "../store/voicesSlice";
 
 import "../i18n/i18n";
 
-// Numbers screen.
+// Letters screen.
 export default function Page() {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const max = useAppSelector(selectMax);
   const activeVoice = useAppSelector(selectActiveVoice);
+  const letters = useAppSelector(selectLetters);
 
   useEffect(() => {
-    navigation.setOptions({ title: t("numbersTitle") });
+    navigation.setOptions({ title: t("lettersTitle") });
   }, [t, navigation]);
-
-  const playlist = Array(max + 1)
-    .fill(null)
-    .map((entry, i) => {
-      return {
-        machineName: `${i}`,
-        recording: activeVoice
-          ? activeVoice?.numberRecordings[i]?.recording
-          : "",
-        children: <Number num={i} word={t(`numbers.${i}`)} />,
-      };
-    });
+  const playlist = letters.map((char, i) => {
+    return {
+      machineName: char,
+      recording: activeVoice ? activeVoice?.letterRecordings[i]?.recording : "",
+      children: <Letter char={char} word={t(`letters.${char}`)} />,
+    };
+  });
 
   return (
     <SafeAreaView style={styles.container}>
