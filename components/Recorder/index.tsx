@@ -3,6 +3,7 @@ import { Audio } from "expo-av";
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
 
+import { forceCreateDir } from "../../lib/files";
 import { play, startRecording, stopRecording } from "../../lib/sound";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { updateVoice } from "../../store/voices";
@@ -56,9 +57,11 @@ export default function Recorder({
               testID={"stop" + i}
               name="stop"
               type="material"
-              onPress={() => {
+              onPress={async () => {
                 if (managingVoice && recording) {
                   const recordingUri = `${managingVoice.dir}/${recordingsDir}${i}.${recording.getURI()?.split(".").pop()}`;
+                  // Ensure recordings dir exists.
+                  await forceCreateDir(`${managingVoice.dir}/${recordingsDir}`);
                   stopRecording(recording, recordingUri);
 
                   recordingVal.recording = recordingUri;
