@@ -6,10 +6,10 @@ import { StyleSheet, View } from "react-native";
 export default function Letter({ char, word }: { char: string; word: string }) {
   return (
     <View style={styles.container}>
-      <Text h1>
-        {char}|{char.toUpperCase()}
+      <Text style={{ fontSize: 60, padding: 20 }}>
+        {char} | {char.toUpperCase()}
       </Text>
-      <Text h3>{word}</Text>
+      <Text h2>{word}</Text>
     </View>
   );
 }
