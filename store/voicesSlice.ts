@@ -12,7 +12,6 @@ import {
 // Tracks voices.
 interface voicesState {
   voices: voice[];
-  isLoading: boolean;
   managingVoice: voice | null;
   activeVoice: voice | null;
   error: string | null | undefined;
@@ -20,7 +19,6 @@ interface voicesState {
 
 const initialState: voicesState = {
   voices: [],
-  isLoading: false,
   error: null,
   managingVoice: null,
   activeVoice: null,
@@ -40,11 +38,7 @@ export const voicesSlice = createSlice({
   },
   extraReducers: (builder) => {
     // Update voice.
-    builder.addCase(updateVoice.pending, (state) => {
-      state.isLoading = true;
-    });
     builder.addCase(updateVoice.fulfilled, (state, action) => {
-      state.isLoading = false;
       // Update voice in voice list.
       state.voices = state.voices.filter(
         (voice) => voice.dir !== action.payload.dir,
@@ -60,15 +54,10 @@ export const voicesSlice = createSlice({
     });
     builder.addCase(updateVoice.rejected, (state, action) => {
       console.error(action.error.message);
-      state.isLoading = false;
       state.error = action.error.message;
     });
     // Delete voice.
-    builder.addCase(deleteVoice.pending, (state) => {
-      state.isLoading = true;
-    });
     builder.addCase(deleteVoice.fulfilled, (state, action) => {
-      state.isLoading = false;
       state.voices = state.voices.filter(
         (voice) => voice.dir !== action.payload.dir,
       );
@@ -79,34 +68,22 @@ export const voicesSlice = createSlice({
     });
     builder.addCase(deleteVoice.rejected, (state, action) => {
       console.error(action.error.message);
-      state.isLoading = false;
       state.error = action.error.message;
     });
     // Create voice.
-    builder.addCase(createVoice.pending, (state) => {
-      state.isLoading = true;
-    });
     builder.addCase(createVoice.fulfilled, (state, action) => {
-      state.isLoading = false;
       state.voices.push(action.payload);
     });
     builder.addCase(createVoice.rejected, (state, action) => {
       console.error(action.error.message);
-      state.isLoading = false;
       state.error = action.error.message;
     });
     // Get voices.
-    builder.addCase(getVoices.pending, (state) => {
-      state.isLoading = true;
-      state.voices = [];
-    });
     builder.addCase(getVoices.fulfilled, (state, action) => {
-      state.isLoading = false;
       state.voices = action.payload;
     });
     builder.addCase(getVoices.rejected, (state, action) => {
       console.error(action.error.message);
-      state.isLoading = false;
       state.error = action.error.message;
       state.voices = [];
     });
