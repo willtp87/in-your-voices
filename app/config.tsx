@@ -61,6 +61,11 @@ export default function Page() {
           onPress={() => router.push("/voices")}
         />
         <Button
+          testID="customTopics"
+          title={t("customTopicsTitle")}
+          onPress={() => router.push("/customTopics")}
+        />
+        <Button
           testID="docs"
           title={t("docs")}
           onPress={() =>

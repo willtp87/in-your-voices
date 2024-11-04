@@ -32,4 +32,18 @@ describe("<Config />", () => {
     await user.press(screen.getByTestId("voices"));
     expect(screen).toHavePathname("/voices");
   });
+  it("can navigate to custom topics", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Config />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("customTopics"));
+    expect(screen).toHavePathname("/customTopics");
+  });
 });

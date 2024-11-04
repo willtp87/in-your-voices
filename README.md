@@ -8,7 +8,8 @@ An IOS app that helps you teach your child with your voices.
 * [Numbers](./docs/numbers.md)
 * [Letters](./docs/letters.md)
 * [Configuration](./docs/config.md)
-* [Voices](./docs/voices.md)
+  * [Voices](./docs/voices.md)
+  * [Custom Topics](./docs/customTopics.md)
 
 ### Data Export
 
