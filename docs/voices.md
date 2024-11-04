@@ -10,4 +10,4 @@ You can:
   * Description
 * Delete Voices
   * There is a confirmation modal.
-* Navigate to the voice screen to make recordings.
+* Navigate to the [voice](./voice.md) screen to make recordings.
