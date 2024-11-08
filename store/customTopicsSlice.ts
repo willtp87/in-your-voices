@@ -64,18 +64,7 @@ export const customTopicsSlice = createSlice({
   extraReducers: (builder) => {
     // Update topic.
     builder.addCase(updateTopic.fulfilled, (state, action) => {
-      // Update topic in topic list.
-      state.topics = state.topics.filter(
-        (topic) => topic.dir !== action.payload.dir,
-      );
-      state.topics.push(action.payload);
-      // Update managing/active topic if they have been edited.
-      if (state.managingTopic?.dir === action.payload.dir) {
-        state.managingTopic = action.payload;
-      }
-      if (state.activeTopic?.dir === action.payload.dir) {
-        state.activeTopic = action.payload;
-      }
+      updateTopicStates(state, action.payload);
     });
     builder.addCase(updateTopic.rejected, (state, action) => {
       console.error(action.error.message);
