@@ -30,7 +30,7 @@ describe("<CustomTopic />", () => {
     );
     expect(await screen.findByText("Add"));
     await user.press(screen.getByRole("button", { name: "Add" }));
-    expect(await screen.findByText("0"));
+    expect(await screen.findByText("1"));
   });
   it("can delete a card", async () => {
     const user = userEvent.setup();
@@ -53,10 +53,10 @@ describe("<CustomTopic />", () => {
     );
     expect(await screen.findByText("Add"));
     await user.press(screen.getByRole("button", { name: "Add" }));
-    expect(await screen.findByText("0"));
+    expect(await screen.findByText("1"));
     await user.press(screen.getByTestId("delete0"));
     await user.press(screen.getByText("Confirm"));
-    expect(await screen.queryByText("0")).toBeFalsy();
+    expect(await screen.queryByText("1")).toBeFalsy();
   });
   // @todo Implement.
   it("can edit a card", async () => {});

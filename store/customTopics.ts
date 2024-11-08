@@ -114,15 +114,15 @@ export const updateTopic = createAsyncThunk(
 export const createCard = createAsyncThunk(
   "createCard",
   async (topic: customTopic) => {
+    const updatedTopic = JSON.parse(JSON.stringify(topic));
+    updatedTopic.cardsOverTime++;
     const newCard = {
       image: "",
       title: null,
       desc: null,
-      machineName: `${topic.cardsOverTime}`,
+      machineName: `${updatedTopic.cardsOverTime}`,
     };
-    const updatedTopic = JSON.parse(JSON.stringify(topic));
     updatedTopic.cards.push(newCard);
-    updatedTopic.cardsOverTime++;
     writeTopicJson(updatedTopic);
     return updatedTopic;
   },
