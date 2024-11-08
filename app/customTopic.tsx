@@ -69,7 +69,8 @@ export default function Page() {
               name="arrow-upward"
               type="material"
               onPress={() => {
-                moveCardUp(card);
+                if (managingCard && managingTopic)
+                  moveCardUp({ topic: managingTopic, card: managingCard });
               }}
             />
             <Icon
@@ -77,7 +78,8 @@ export default function Page() {
               name="arrow-downward"
               type="material"
               onPress={() => {
-                moveCardDown(card);
+                if (managingCard && managingTopic)
+                  moveCardDown({ topic: managingTopic, card: managingCard });
               }}
             />
             <Icon
@@ -114,7 +116,10 @@ export default function Page() {
             <Dialog.Button
               title={t("confirm")}
               onPress={() => {
-                if (managingCard) dispatch(deleteCard(managingCard));
+                if (managingCard && managingTopic)
+                  dispatch(
+                    deleteCard({ topic: managingTopic, card: managingCard }),
+                  );
                 setDeleteVisible(false);
               }}
             />
@@ -145,12 +150,15 @@ export default function Page() {
             <Dialog.Button
               title={t("save")}
               onPress={() => {
-                if (managingCard)
+                if (managingCard && managingTopic)
                   dispatch(
                     updateCard({
-                      ...managingCard,
-                      title,
-                      desc,
+                      topic: managingTopic,
+                      card: {
+                        ...managingCard,
+                        title,
+                        desc,
+                      },
                     }),
                   );
                 setMetaDataVisible(false);

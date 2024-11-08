@@ -124,25 +124,45 @@ export const createCard = createAsyncThunk(
     updatedTopic.cards.push(newCard);
     updatedTopic.cardsOverTime++;
     writeTopicJson(updatedTopic);
-    return newCard;
+    return updatedTopic;
   },
 );
-// @todo Implement deleteCard.
-export const deleteCard = createAsyncThunk("deleteCard", async (card: card) => {
-  return card;
-});
+// Implement deleteCard.
+export const deleteCard = createAsyncThunk(
+  "deleteCard",
+  async ({ topic, card }: { topic: customTopic; card: card }) => {
+    const updatedTopic = JSON.parse(JSON.stringify(topic));
+    updatedTopic.cards = updatedTopic.cards.filter(
+      (val: card) => val.machineName !== card.machineName,
+    );
+    writeTopicJson(updatedTopic);
+    return updatedTopic;
+  },
+);
 // @todo Implement updateCard.
-export const updateCard = createAsyncThunk("updateCard", async (card: card) => {
-  return card;
-});
+export const updateCard = createAsyncThunk(
+  "updateCard",
+  async ({ topic, card }: { topic: customTopic; card: card }) => {
+    const updatedTopic = JSON.parse(JSON.stringify(topic));
+    writeTopicJson(updatedTopic);
+    return updatedTopic;
+  },
+);
 // @todo Implement moveCardUp.
-export const moveCardUp = createAsyncThunk("moveCardUp", async (card: card) => {
-  return card;
-});
+export const moveCardUp = createAsyncThunk(
+  "moveCardUp",
+  async ({ topic, card }: { topic: customTopic; card: card }) => {
+    const updatedTopic = JSON.parse(JSON.stringify(topic));
+    writeTopicJson(updatedTopic);
+    return updatedTopic;
+  },
+);
 // @todo Implement moveCardDown.
 export const moveCardDown = createAsyncThunk(
   "moveCardDown",
-  async (card: card) => {
-    return card;
+  async ({ topic, card }: { topic: customTopic; card: card }) => {
+    const updatedTopic = JSON.parse(JSON.stringify(topic));
+    writeTopicJson(updatedTopic);
+    return updatedTopic;
   },
 );

@@ -32,6 +32,20 @@ const initialState: customTopicsState = {
   error: null,
 };
 
+// Helper that updates managing, active and topic list with a new topic.
+const updateTopicStates = (state: customTopicsState, topic: customTopic) => {
+  // Update managing topic.
+  state.managingTopic = topic;
+  // Update active topic.
+  if (state.managingTopic?.dir === state.activeTopic?.dir)
+    state.activeTopic = state.managingTopic;
+  // Update topic in topic list.
+  state.topics = state.topics.filter(
+    (topic) => topic.dir !== state.managingTopic?.dir,
+  );
+  if (state.managingTopic) state.topics.push(state.managingTopic);
+};
+
 // Slice definition.
 export const customTopicsSlice = createSlice({
   name: "customTopics",
@@ -44,7 +58,7 @@ export const customTopicsSlice = createSlice({
       state.activeTopic = action.payload;
     },
     setManagingCard: (state, action) => {
-      state.activeTopic = action.payload;
+      state.managingCard = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -98,52 +112,42 @@ export const customTopicsSlice = createSlice({
       state.error = action.error.message;
       state.topics = [];
     });
-    // Create a Card in the currently managing topic.
+    // Create a Card in the supplied topic.
     builder.addCase(createCard.fulfilled, (state, action) => {
-      if (!action.payload || !state.managingTopic) return;
-      // Update active/managing topics.
-      state.managingTopic.cards.push(action.payload);
-      state.managingTopic.cardsOverTime++;
-      if (state.managingTopic?.dir === state.activeTopic?.dir)
-        state.activeTopic = state.managingTopic;
-      // Update topic in topic list.
-      state.topics = state.topics.filter(
-        (topic) => topic.dir !== state.managingTopic?.dir,
-      );
-      state.topics.push(state.managingTopic);
+      updateTopicStates(state, action.payload);
     });
     builder.addCase(createCard.rejected, (state, action) => {
       console.error(action.error.message);
       state.error = action.error.message;
     });
-    // @todo Implement deleteCard in the currently managing topic.
-    // @todo unset managing card.
-    // @todo update topic, managing/active topic.
-    builder.addCase(deleteCard.fulfilled, (state, action) => {});
+    // Delete a card from its topic.
+    builder.addCase(deleteCard.fulfilled, (state, action) => {
+      updateTopicStates(state, action.payload);
+    });
     builder.addCase(deleteCard.rejected, (state, action) => {
       console.error(action.error.message);
       state.error = action.error.message;
     });
-    // @todo Implement updateCard in the currently managing topic.
-    // Update managing card if they have been edited.
-    // @todo update topic, managing/active topic.
-    builder.addCase(updateCard.fulfilled, (state, action) => {});
+    // Update a card in its topic.
+    builder.addCase(updateCard.fulfilled, (state, action) => {
+      updateTopicStates(state, action.payload);
+    });
     builder.addCase(updateCard.rejected, (state, action) => {
       console.error(action.error.message);
       state.error = action.error.message;
     });
-    // @todo Implement moveCardUp in the currently managing topic.
-    // Update managing card if they have been edited.
-    // @todo update topic, managing/active topic.
-    builder.addCase(moveCardUp.fulfilled, (state, action) => {});
+    // Move a card down in its topic.
+    builder.addCase(moveCardUp.fulfilled, (state, action) => {
+      updateTopicStates(state, action.payload);
+    });
     builder.addCase(moveCardUp.rejected, (state, action) => {
       console.error(action.error.message);
       state.error = action.error.message;
     });
-    // @todo Implement moveCardDown in the currently managing topic.
-    // Update managing card if they have been edited.
-    // @todo update topic, managing/active topic.
-    builder.addCase(moveCardDown.fulfilled, (state, action) => {});
+    // Move a card up in its topic.
+    builder.addCase(moveCardDown.fulfilled, (state, action) => {
+      updateTopicStates(state, action.payload);
+    });
     builder.addCase(moveCardDown.rejected, (state, action) => {
       console.error(action.error.message);
       state.error = action.error.message;
