@@ -139,11 +139,15 @@ export const deleteCard = createAsyncThunk(
     return updatedTopic;
   },
 );
-// @todo Implement updateCard.
+// Implement updateCard.
 export const updateCard = createAsyncThunk(
   "updateCard",
   async ({ topic, card }: { topic: customTopic; card: card }) => {
     const updatedTopic = JSON.parse(JSON.stringify(topic));
+    const cardIndex = updatedTopic.cards.findIndex(
+      (val: card) => val.machineName === card.machineName,
+    );
+    updatedTopic.cards[cardIndex] = card;
     writeTopicJson(updatedTopic);
     return updatedTopic;
   },
