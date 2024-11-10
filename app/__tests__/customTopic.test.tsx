@@ -1,4 +1,4 @@
-import { render, userEvent, act } from "@testing-library/react-native";
+import { render, userEvent, act, within } from "@testing-library/react-native";
 import { screen } from "expo-router/testing-library";
 import React from "react";
 import { Provider } from "react-redux";
@@ -87,7 +87,59 @@ describe("<CustomTopic />", () => {
     expect(screen.queryByText("1")).toBeFalsy();
     expect(screen.getByText("testTitle"));
   });
+  it("can re-order a card", async () => {
+    const user = userEvent.setup();
+    const dispatch = store.dispatch;
+    const topic = {
+      dir: "./topics/0",
+      title: "title",
+      desc: "desc",
+      cards: [],
+      cardsOverTime: 0,
+    };
+    dispatch(createTopic());
+    act(() => {
+      dispatch(setManagingTopic(topic));
+    });
+    render(
+      <Provider store={store}>
+        <CustomTopic />
+      </Provider>,
+    );
+    expect(await screen.findByText("Add"));
+    await user.press(screen.getByRole("button", { name: "Add" }));
+    await user.press(screen.getByRole("button", { name: "Add" }));
+    await user.press(screen.getByRole("button", { name: "Add" }));
+    let cards = screen.getAllByTestId("cardTitle", {
+      exact: false,
+    });
+    expect(cards.length).toBe(3);
+    expect(within(cards[0]).getByText("1")).toBeTruthy();
+    expect(within(cards[1]).getByText("2")).toBeTruthy();
+    expect(within(cards[2]).getByText("3")).toBeTruthy();
+    await user.press(screen.getByTestId("up0"));
+    await user.press(screen.getByTestId("down2"));
+    cards = screen.getAllByTestId("cardTitle", {
+      exact: false,
+    });
+    expect(within(cards[0]).getByText("1")).toBeTruthy();
+    expect(within(cards[1]).getByText("2")).toBeTruthy();
+    expect(within(cards[2]).getByText("3")).toBeTruthy();
+    await user.press(screen.getByTestId("up1"));
+    cards = screen.getAllByTestId("cardTitle", {
+      exact: false,
+    });
+    expect(within(cards[0]).getByText("2")).toBeTruthy();
+    expect(within(cards[1]).getByText("1")).toBeTruthy();
+    expect(within(cards[2]).getByText("3")).toBeTruthy();
+    await user.press(screen.getByTestId("down0"));
+    cards = screen.getAllByTestId("cardTitle", {
+      exact: false,
+    });
+    expect(within(cards[0]).getByText("1")).toBeTruthy();
+    expect(within(cards[1]).getByText("2")).toBeTruthy();
+    expect(within(cards[2]).getByText("3")).toBeTruthy();
+  });
   // @todo Implement.
-  it("can re-order a card", async () => {});
   it("can add an image to card", async () => {});
 });

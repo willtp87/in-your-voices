@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as FileSystem from "expo-file-system";
 
+import { arrayValUp, arrayValDown } from "../lib/datastructures";
 import { forceCreateDir } from "../lib/files";
 
 // CustomTopics CRUD.
@@ -152,20 +153,22 @@ export const updateCard = createAsyncThunk(
     return updatedTopic;
   },
 );
-// @todo Implement moveCardUp.
+// Implement moveCardUp.
 export const moveCardUp = createAsyncThunk(
   "moveCardUp",
   async ({ topic, card }: { topic: customTopic; card: card }) => {
     const updatedTopic = JSON.parse(JSON.stringify(topic));
+    arrayValUp(updatedTopic.cards, card);
     writeTopicJson(updatedTopic);
     return updatedTopic;
   },
 );
-// @todo Implement moveCardDown.
+// Implement moveCardDown.
 export const moveCardDown = createAsyncThunk(
   "moveCardDown",
   async ({ topic, card }: { topic: customTopic; card: card }) => {
     const updatedTopic = JSON.parse(JSON.stringify(topic));
+    arrayValDown(updatedTopic.cards, card);
     writeTopicJson(updatedTopic);
     return updatedTopic;
   },

@@ -50,9 +50,9 @@ export default function Page() {
         }}
       >
         {cards.map((card, i) => (
-          <ListItem key={i} bottomDivider>
+          <ListItem testID={`card${i}`} key={i} bottomDivider>
             <ListItem.Content>
-              <ListItem.Title>
+              <ListItem.Title testID={`cardTitle${i}`}>
                 {card.title ? card.title : card.machineName}
               </ListItem.Title>
             </ListItem.Content>
@@ -68,18 +68,20 @@ export default function Page() {
               testID={"up" + i}
               name="arrow-upward"
               type="material"
+              disabled={i === 0}
               onPress={() => {
-                if (managingCard && managingTopic)
-                  moveCardUp({ topic: managingTopic, card: managingCard });
+                if (managingTopic)
+                  dispatch(moveCardUp({ topic: managingTopic, card }));
               }}
             />
             <Icon
               testID={"down" + i}
               name="arrow-downward"
               type="material"
+              disabled={i === cards.length - 1}
               onPress={() => {
-                if (managingCard && managingTopic)
-                  moveCardDown({ topic: managingTopic, card: managingCard });
+                if (managingTopic)
+                  dispatch(moveCardDown({ topic: managingTopic, card }));
               }}
             />
             <Icon
