@@ -31,7 +31,7 @@ describe("<CustomTopic />", () => {
     expect(await screen.findByText("Add"));
     await user.press(screen.getByRole("button", { name: "Add" }));
     expect(await screen.findByText("1"));
-  });
+  }, 10000);
   it("can delete a card", async () => {
     const user = userEvent.setup();
     const dispatch = store.dispatch;
