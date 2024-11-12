@@ -2,7 +2,7 @@ import { Button, ListItem, Icon, Dialog, Input } from "@rneui/themed";
 import { useNavigation } from "expo-router";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import {
@@ -56,48 +56,52 @@ export default function Page() {
                 {card.title ? card.title : card.machineName}
               </ListItem.Title>
             </ListItem.Content>
-            <Icon
-              testID={"camera" + i}
-              name="photo-camera"
-              type="material"
-              onPress={() => {
-                // @todo Implement.
-              }}
-            />
-            <Icon
-              testID={"up" + i}
-              name="arrow-upward"
-              type="material"
-              disabled={i === 0}
-              onPress={() => {
-                if (managingTopic)
-                  dispatch(moveCardUp({ topic: managingTopic, card }));
-              }}
-            />
-            <Icon
-              testID={"down" + i}
-              name="arrow-downward"
-              type="material"
-              disabled={i === cards.length - 1}
-              onPress={() => {
-                if (managingTopic)
-                  dispatch(moveCardDown({ topic: managingTopic, card }));
-              }}
-            />
-            <Icon
-              testID={"edit" + i}
-              name="edit"
-              type="material"
-              onPress={() => {
-                dispatch(setManagingCard(card));
+            <View>
+              <Icon
+                testID={"camera" + i}
+                name="photo-camera"
+                type="material"
+                onPress={() => {
+                  // @todo Implement.
+                }}
+              />
+              <Icon
+                testID={"edit" + i}
+                name="edit"
+                type="material"
+                onPress={() => {
+                  dispatch(setManagingCard(card));
 
-                // If we don't set these the last edited vals will be used.
-                setTitle(card?.title ?? "");
-                setDesc(card?.desc ?? "");
+                  // If we don't set these the last edited vals will be used.
+                  setTitle(card?.title ?? "");
+                  setDesc(card?.desc ?? "");
 
-                setMetaDataVisible(true);
-              }}
-            />
+                  setMetaDataVisible(true);
+                }}
+              />
+            </View>
+            <View>
+              <Icon
+                testID={"up" + i}
+                name="arrow-upward"
+                type="material"
+                disabled={i === 0}
+                onPress={() => {
+                  if (managingTopic)
+                    dispatch(moveCardUp({ topic: managingTopic, card }));
+                }}
+              />
+              <Icon
+                testID={"down" + i}
+                name="arrow-downward"
+                type="material"
+                disabled={i === cards.length - 1}
+                onPress={() => {
+                  if (managingTopic)
+                    dispatch(moveCardDown({ topic: managingTopic, card }));
+                }}
+              />
+            </View>
             <Icon
               testID={"delete" + i}
               name="delete"
