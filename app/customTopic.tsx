@@ -1,4 +1,5 @@
 import { Button, ListItem, Icon, Dialog, Input } from "@rneui/themed";
+import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "expo-router";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -61,8 +62,15 @@ export default function Page() {
                 testID={"camera" + i}
                 name="photo-camera"
                 type="material"
-                onPress={() => {
-                  // @todo Implement.
+                onPress={async () => {
+                  dispatch(setManagingCard(card));
+                  const result = await ImagePicker.launchImageLibraryAsync({
+                    quality: 1,
+                  });
+                  if (!result.canceled) {
+                    // @todo implement; copy image and update topic/card.
+                    console.log(result.assets[0].uri);
+                  }
                 }}
               />
               <Icon
