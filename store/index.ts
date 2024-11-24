@@ -18,6 +18,7 @@ import numbersReducer from "./numbersSlice";
 import settingsReducer from "./settingsSlice";
 import timeInAppReducer from "./timeInAppSlice";
 import voicesReducer from "./voicesSlice";
+AsyncStorage.clear();
 
 // Only persist the `settings` slice.
 const persistConfig = {

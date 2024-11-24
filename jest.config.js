@@ -1,6 +1,6 @@
 module.exports = {
   testEnvironment: "node",
-  preset: "jest-expo",
+  preset: "jest-expo/ios",
   transform: {
     "^.+\\.tsx?$": [
       "ts-jest",
