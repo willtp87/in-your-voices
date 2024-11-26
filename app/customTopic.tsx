@@ -1,9 +1,10 @@
 import { Button, ListItem, Icon, Dialog, Input } from "@rneui/themed";
+import * as FileSystem from "expo-file-system";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "expo-router";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import {
@@ -32,6 +33,7 @@ export default function Page() {
 
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [metaDataVisible, setMetaDataVisible] = useState(false);
+  const [imageVisible, setImageVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
@@ -57,6 +59,17 @@ export default function Page() {
                 {card.title ? card.title : card.machineName}
               </ListItem.Title>
             </ListItem.Content>
+            {card?.image && (
+              <Icon
+                testID={"image" + i}
+                name="image"
+                type="material"
+                onPress={async () => {
+                  dispatch(setManagingCard(card));
+                  setImageVisible(true);
+                }}
+              />
+            )}
             <View>
               <Icon
                 testID={"camera" + i}
@@ -68,8 +81,26 @@ export default function Page() {
                     quality: 1,
                   });
                   if (!result.canceled) {
-                    // @todo implement; copy image and update topic/card.
-                    console.log(result.assets[0].uri);
+                    try {
+                      // Copy image and update topic/card.
+                      const imgTarget = `${managingTopic?.dir}/${card?.machineName}.${result.assets[0].uri?.split(".").pop()}`;
+                      await FileSystem.copyAsync({
+                        from: result.assets[0].uri,
+                        to: imgTarget,
+                      });
+                      if (managingTopic)
+                        dispatch(
+                          updateCard({
+                            topic: managingTopic,
+                            card: {
+                              ...card,
+                              image: imgTarget,
+                            },
+                          }),
+                        );
+                    } catch (err) {
+                      console.error("Failed to save image", err);
+                    }
                   }
                 }}
               />
@@ -181,6 +212,23 @@ export default function Page() {
             <Dialog.Button
               title={t("cancel")}
               onPress={() => setMetaDataVisible(false)}
+            />
+          </Dialog.Actions>
+        </Dialog>
+        <Dialog
+          isVisible={imageVisible}
+          onBackdropPress={() => setImageVisible(false)}
+        >
+          {managingCard?.image && (
+            <Image
+              style={[{ width: 150, height: 150 }, { resizeMode: "contain" }]}
+              source={{ uri: managingCard?.image }}
+            />
+          )}
+          <Dialog.Actions>
+            <Dialog.Button
+              title={t("cancel")}
+              onPress={() => setImageVisible(false)}
             />
           </Dialog.Actions>
         </Dialog>
