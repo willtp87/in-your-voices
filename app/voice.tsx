@@ -33,6 +33,11 @@ export default function Page() {
         title={t("lettersTitle")}
         onPress={() => router.push("/recordLetters")}
       />
+      <Button
+        testID="custom"
+        title={t("recordCustomTopicsTitle")}
+        onPress={() => router.push("/recordCustomTopics")}
+      />
     </SafeAreaView>
   );
 }
