@@ -140,6 +140,4 @@ describe("<CustomTopic />", () => {
     expect(within(cards[1]).getByText("2")).toBeTruthy();
     expect(within(cards[2]).getByText("3")).toBeTruthy();
   });
-  // @todo Implement.
-  it("can add an image to card", async () => {});
 });

@@ -35,7 +35,7 @@ export default function Page() {
       />
       <Button
         testID="custom"
-        title={t("recordCustomTopicsTitle")}
+        title={t("customTopicsTitle")}
         onPress={() => router.push("/recordCustomTopics")}
       />
     </SafeAreaView>

@@ -22,6 +22,7 @@ export interface customTopic {
   desc: string | null;
   cardsOverTime: number;
   cards: card[];
+  recordingsType: string;
 }
 
 // Directory constants.
@@ -37,6 +38,7 @@ export const getTopics = createAsyncThunk("getCustomTopics", async () => {
       topicDirs.map(async (topicDir) => {
         let topicVals: customTopic = {
           dir: customTopicsDir + topicDir,
+          recordingsType: "",
           title: null,
           desc: null,
           cards: [],
@@ -71,19 +73,19 @@ export const createTopic = createAsyncThunk("createTopic", async () => {
   await forceCreateDir(customTopicsDir);
 
   const topicDirs = await FileSystem.readDirectoryAsync(customTopicsDir);
-  const topicDir =
-    customTopicsDir +
-    (topicDirs
-      ? topicDirs.reduce((acc: number, value: string) => {
-          return (acc =
-            acc > parseInt(value, 10) ? acc : parseInt(value, 10) + 1);
-        }, 1)
-      : 1);
+  const topicBaseName = topicDirs
+    ? topicDirs.reduce((acc: number, value: string) => {
+        return (acc =
+          acc > parseInt(value, 10) ? acc : parseInt(value, 10) + 1);
+      }, 1)
+    : 1;
+  const topicDir = customTopicsDir + topicBaseName;
 
   await forceCreateDir(topicDir);
 
   const topic = {
     dir: topicDir,
+    recordingsType: `${topicBaseName}`,
     title: null,
     desc: null,
     cards: [],
