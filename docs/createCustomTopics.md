@@ -1,6 +1,6 @@
-# Custom Topics
+# Record Custom Topics
 
-The custom topics screen lets you create your own decks of flash cards.
+The record custom topics screen lets you create your own decks of flash cards.
 You can:
 
 * Add Topics
