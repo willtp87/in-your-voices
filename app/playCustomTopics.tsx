@@ -6,7 +6,7 @@ import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { getTopics } from "../store/customTopics";
-import { selectTopics, setManagingTopic } from "../store/customTopicsSlice";
+import { selectTopics, setActiveTopic } from "../store/customTopicsSlice";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import "../i18n/i18n";
 
@@ -42,8 +42,8 @@ export default function Page() {
             <ListItem.Chevron
               testID={"enterTopic" + i}
               onPress={() => {
-                dispatch(setManagingTopic(topic));
-                router.push("/plaCustomTopic");
+                dispatch(setActiveTopic(topic));
+                router.push("/playCustomTopic");
               }}
             />
           </ListItem>

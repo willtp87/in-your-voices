@@ -26,7 +26,7 @@ export default function Page() {
   // Generate recordings list.
   let presentRecordings = managingVoice?.[recordingsType as keyof voice];
   presentRecordings = Array.isArray(presentRecordings) ? presentRecordings : [];
-  // @todo handle existing recording.
+
   const recordingsList = managingTopic?.cards.map((card) => {
     const recording = presentRecordings?.find(
       (rec) => rec.machineName === card.machineName,
