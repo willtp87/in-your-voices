@@ -1,16 +1,6 @@
 module.exports = {
   testEnvironment: "node",
   preset: "jest-expo/ios",
-  transform: {
-    "^.+\\.tsx?$": [
-      "ts-jest",
-      {
-        tsconfig: {
-          jsx: "react",
-        },
-      },
-    ],
-  },
   testMatch: ["**/?(*.)+(spec|test).ts?(x)"],
   moduleFileExtensions: ["js", "ts", "tsx"],
   transformIgnorePatterns: [

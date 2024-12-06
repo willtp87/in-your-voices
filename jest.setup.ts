@@ -1,6 +1,9 @@
 // Make toBeInTheDocument() available globally.
 import "@testing-library/jest-dom";
 
+// https://github.com/callstack/react-native-paper/issues/4561
+jest.mock("expo-font");
+
 // https://github.com/expo/expo/issues/27496
 jest.mock("expo-localization", () => ({
   ...jest.requireActual("expo-localization"),
