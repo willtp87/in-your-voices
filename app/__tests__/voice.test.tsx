@@ -35,4 +35,18 @@ describe("<Voice />", () => {
     await user.press(screen.getByTestId("letters"));
     expect(screen).toHavePathname("/recordLetters");
   });
+  it("can navigate to custom topics", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Voice />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("custom"));
+    expect(screen).toHavePathname("/recordCustomTopics");
+  });
 });
