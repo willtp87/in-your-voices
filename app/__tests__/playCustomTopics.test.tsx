@@ -1,6 +1,4 @@
-import {
-  renderRouter,
-} from "expo-router/testing-library";
+import { renderRouter } from "expo-router/testing-library";
 import React from "react";
 import { Provider } from "react-redux";
 
