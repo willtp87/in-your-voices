@@ -24,6 +24,11 @@ export default function Page() {
     <SafeAreaView style={styles.container}>
       <Text>{managingVoice?.desc}</Text>
       <Button
+        testID="custom"
+        title={t("customTopicsTitle")}
+        onPress={() => router.push("/recordCustomTopics")}
+      />
+      <Button
         testID="numbers"
         title={t("numbersTitle")}
         onPress={() => router.push("/recordNumbers")}
@@ -34,9 +39,9 @@ export default function Page() {
         onPress={() => router.push("/recordLetters")}
       />
       <Button
-        testID="custom"
-        title={t("customTopicsTitle")}
-        onPress={() => router.push("/recordCustomTopics")}
+        testID="colours"
+        title={t("coloursTitle")}
+        onPress={() => router.push("/colours/recordColours")}
       />
     </SafeAreaView>
   );

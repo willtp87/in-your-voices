@@ -23,6 +23,12 @@ export default function Index() {
     <SafeAreaView>
       <StatusBar style="auto" />
       <VoiceSelect />
+      <TimeInApp />
+      <Button
+        testID="custom"
+        title={t("customTopicsTitle")}
+        onPress={() => router.push("/playCustomTopics")}
+      />
       <Button
         testID="numbers"
         title={t("numbersTitle")}
@@ -34,11 +40,10 @@ export default function Index() {
         onPress={() => router.push("/letters")}
       />
       <Button
-        testID="custom"
-        title={t("customTopicsTitle")}
-        onPress={() => router.push("/playCustomTopics")}
+        testID="colours"
+        title={t("coloursTitle")}
+        onPress={() => router.push("/colours/colours")}
       />
-      <TimeInApp />
       <Icon
         testID="config"
         name="settings"
