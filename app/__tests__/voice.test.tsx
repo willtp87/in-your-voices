@@ -35,6 +35,20 @@ describe("<Voice />", () => {
     await user.press(screen.getByTestId("letters"));
     expect(screen).toHavePathname("/letters/recordLetters");
   });
+  it("can navigate to recordColours", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Voice />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("colours"));
+    expect(screen).toHavePathname("/colours/recordColours");
+  });
   it("can navigate to custom topics", async () => {
     const user = userEvent.setup();
 

@@ -49,4 +49,32 @@ describe("<Index />", () => {
     await user.press(screen.getByTestId("letters"));
     expect(screen).toHavePathname("/letters/letters");
   });
+  it("can navigate to colours", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Index />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("colours"));
+    expect(screen).toHavePathname("/colours/colours");
+  });
+  it("can navigate to custom topics", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Index />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("custom"));
+    expect(screen).toHavePathname("/custom/customTopics");
+  });
 });
