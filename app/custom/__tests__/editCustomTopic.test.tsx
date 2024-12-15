@@ -3,10 +3,10 @@ import { screen } from "expo-router/testing-library";
 import React from "react";
 import { Provider } from "react-redux";
 
-import { store } from "../../store";
-import { createTopic } from "../../store/customTopics";
-import { setManagingTopic } from "../../store/customTopicsSlice";
-import CustomTopic from "../customTopic";
+import { store } from "../../../store";
+import { createTopic } from "../../../store/customTopics";
+import { setManagingTopic } from "../../../store/customTopicsSlice";
+import CustomTopic from "../editCustomTopic";
 
 describe("<CustomTopic />", () => {
   it("can add a card", async () => {

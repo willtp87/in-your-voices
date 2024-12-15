@@ -27,17 +27,17 @@ export default function Index() {
       <Button
         testID="custom"
         title={t("customTopicsTitle")}
-        onPress={() => router.push("/playCustomTopics")}
+        onPress={() => router.push("/custom/customTopics")}
       />
       <Button
         testID="numbers"
         title={t("numbersTitle")}
-        onPress={() => router.push("/numbers")}
+        onPress={() => router.push("/numbers/numbers")}
       />
       <Button
         testID="letters"
         title={t("lettersTitle")}
-        onPress={() => router.push("/letters")}
+        onPress={() => router.push("/letters/letters")}
       />
       <Button
         testID="colours"

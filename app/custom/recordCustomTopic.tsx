@@ -1,14 +1,14 @@
 import { useNavigation } from "expo-router";
 import React, { useEffect } from "react";
-import "../i18n/i18n";
+import "../../i18n/i18n";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Recorder from "../components/Recorder";
-import { selectManagingTopic } from "../store/customTopicsSlice";
-import { useAppSelector } from "../store/hooks";
-import { voice } from "../store/voices";
-import { selectManagingVoice } from "../store/voicesSlice";
+import Recorder from "../../components/Recorder";
+import { selectManagingTopic } from "../../store/customTopicsSlice";
+import { useAppSelector } from "../../store/hooks";
+import { voice } from "../../store/voices";
+import { selectManagingVoice } from "../../store/voicesSlice";
 
 // Screen to record custom cards.
 export default function Page() {

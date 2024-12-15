@@ -2,11 +2,11 @@ import { render, screen, userEvent, act } from "@testing-library/react-native";
 import React from "react";
 import { Provider } from "react-redux";
 
-import { store } from "../../store";
-import { createTopic, getTopics } from "../../store/customTopics";
-import { setActiveTopic } from "../../store/customTopicsSlice";
-import { switchAutoPlay } from "../../store/settingsSlice";
-import PlayCustomTopic from "../playCustomTopic";
+import { store } from "../../../store";
+import { createTopic, getTopics } from "../../../store/customTopics";
+import { setActiveTopic } from "../../../store/customTopicsSlice";
+import { switchAutoPlay } from "../../../store/settingsSlice";
+import PlayCustomTopic from "../customTopic";
 
 describe("<PlayCustomTopic />", () => {
   it("uses first increment", async () => {

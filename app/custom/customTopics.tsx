@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { getTopics } from "../store/customTopics";
-import { selectTopics, setActiveTopic } from "../store/customTopicsSlice";
-import { useAppSelector, useAppDispatch } from "../store/hooks";
-import "../i18n/i18n";
+import { getTopics } from "../../store/customTopics";
+import { selectTopics, setActiveTopic } from "../../store/customTopicsSlice";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import "../../i18n/i18n";
 
 // Play topics entry screen.
 export default function Page() {
@@ -43,7 +43,7 @@ export default function Page() {
               testID={"enterTopic" + i}
               onPress={() => {
                 dispatch(setActiveTopic(topic));
-                router.push("/playCustomTopic");
+                router.push("/custom/customTopic");
               }}
             />
           </ListItem>

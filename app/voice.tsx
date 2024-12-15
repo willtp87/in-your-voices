@@ -26,17 +26,17 @@ export default function Page() {
       <Button
         testID="custom"
         title={t("customTopicsTitle")}
-        onPress={() => router.push("/recordCustomTopics")}
+        onPress={() => router.push("/custom/recordCustomTopics")}
       />
       <Button
         testID="numbers"
         title={t("numbersTitle")}
-        onPress={() => router.push("/recordNumbers")}
+        onPress={() => router.push("/numbers/recordNumbers")}
       />
       <Button
         testID="letters"
         title={t("lettersTitle")}
-        onPress={() => router.push("/recordLetters")}
+        onPress={() => router.push("/letters/recordLetters")}
       />
       <Button
         testID="colours"

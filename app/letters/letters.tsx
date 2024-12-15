@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Letter from "../components/Letter";
-import Player from "../components/Player";
-import { useAppSelector } from "../store/hooks";
-import { selectLetters } from "../store/lettersSlice";
-import { selectActiveVoice } from "../store/voicesSlice";
+import Letter from "../../components/Letter";
+import Player from "../../components/Player";
+import { useAppSelector } from "../../store/hooks";
+import { selectLetters } from "../../store/lettersSlice";
+import { selectActiveVoice } from "../../store/voicesSlice";
 
-import "../i18n/i18n";
+import "../../i18n/i18n";
 
 // Letters screen.
 export default function Page() {

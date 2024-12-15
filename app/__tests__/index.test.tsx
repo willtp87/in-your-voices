@@ -33,7 +33,7 @@ describe("<Index />", () => {
     });
 
     await user.press(screen.getByTestId("numbers"));
-    expect(screen).toHavePathname("/numbers");
+    expect(screen).toHavePathname("/numbers/numbers");
   });
   it("can navigate to letters", async () => {
     const user = userEvent.setup();
@@ -47,6 +47,6 @@ describe("<Index />", () => {
     });
 
     await user.press(screen.getByTestId("letters"));
-    expect(screen).toHavePathname("/letters");
+    expect(screen).toHavePathname("/letters/letters");
   });
 });

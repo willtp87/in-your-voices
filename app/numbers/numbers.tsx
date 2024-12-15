@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Number from "../components/Number";
-import Player from "../components/Player";
-import { useAppSelector } from "../store/hooks";
-import { selectMax } from "../store/numbersSlice";
-import { selectActiveVoice } from "../store/voicesSlice";
+import Number from "../../components/Number";
+import Player from "../../components/Player";
+import { useAppSelector } from "../../store/hooks";
+import { selectMax } from "../../store/numbersSlice";
+import { selectActiveVoice } from "../../store/voicesSlice";
 
-import "../i18n/i18n";
+import "../../i18n/i18n";
 
 // Numbers screen.
 export default function Page() {

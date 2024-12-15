@@ -5,13 +5,13 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Player from "../components/Player";
-import { selectActiveTopic } from "../store/customTopicsSlice";
-import { useAppSelector } from "../store/hooks";
-import { voice } from "../store/voices";
-import { selectActiveVoice } from "../store/voicesSlice";
+import Player from "../../components/Player";
+import { selectActiveTopic } from "../../store/customTopicsSlice";
+import { useAppSelector } from "../../store/hooks";
+import { voice } from "../../store/voices";
+import { selectActiveVoice } from "../../store/voicesSlice";
 
-import "../i18n/i18n";
+import "../../i18n/i18n";
 
 // Play custom topic screen.
 export default function Page() {

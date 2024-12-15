@@ -14,14 +14,14 @@ import {
   updateCard,
   moveCardUp,
   moveCardDown,
-} from "../store/customTopics";
+} from "../../store/customTopics";
 import {
   selectManagingTopic,
   selectManagingCard,
   setManagingCard,
-} from "../store/customTopicsSlice";
-import { useAppSelector, useAppDispatch } from "../store/hooks";
-import "../i18n/i18n";
+} from "../../store/customTopicsSlice";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import "../../i18n/i18n";
 
 // Cards entry screen.
 export default function Page() {

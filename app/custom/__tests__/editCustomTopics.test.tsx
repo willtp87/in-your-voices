@@ -3,8 +3,8 @@ import { renderRouter, screen } from "expo-router/testing-library";
 import React from "react";
 import { Provider } from "react-redux";
 
-import { store } from "../../store";
-import Topics from "../customTopics";
+import { store } from "../../../store";
+import Topics from "../editCustomTopics";
 
 describe("<Topics />", () => {
   it("can add topics", async () => {
@@ -62,6 +62,6 @@ describe("<Topics />", () => {
 
     await user.press(screen.getByRole("button", { name: "Add" }));
     await user.press(screen.getByTestId("enterTopic0"));
-    expect(screen).toHavePathname("/customTopic");
+    expect(screen).toHavePathname("/custom/editCustomTopic");
   });
 });

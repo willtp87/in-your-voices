@@ -63,7 +63,7 @@ export default function Page() {
         <Button
           testID="customTopics"
           title={t("customTopicsTitle")}
-          onPress={() => router.push("/customTopics")}
+          onPress={() => router.push("/custom/editCustomTopics")}
         />
         <Button
           testID="docs"

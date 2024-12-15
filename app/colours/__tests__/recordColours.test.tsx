@@ -2,10 +2,10 @@ import { render, screen, act } from "@testing-library/react-native";
 import React from "react";
 import { Provider } from "react-redux";
 
-import { store } from "../../store";
-import { createVoice } from "../../store/voices";
-import { setManagingVoice } from "../../store/voicesSlice";
-import RecordColours from "../colours/recordColours";
+import { store } from "../../../store";
+import { createVoice } from "../../../store/voices";
+import { setManagingVoice } from "../../../store/voicesSlice";
+import RecordColours from "../recordColours";
 
 describe("<RecordColours />", () => {
   it("uses a voice", async () => {

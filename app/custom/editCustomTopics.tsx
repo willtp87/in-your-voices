@@ -10,14 +10,14 @@ import {
   createTopic,
   deleteTopic,
   updateTopic,
-} from "../store/customTopics";
+} from "../../store/customTopics";
 import {
   selectTopics,
   selectManagingTopic,
   setManagingTopic,
-} from "../store/customTopicsSlice";
-import { useAppSelector, useAppDispatch } from "../store/hooks";
-import "../i18n/i18n";
+} from "../../store/customTopicsSlice";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import "../../i18n/i18n";
 
 // Topics entry screen.
 export default function Page() {
@@ -81,7 +81,7 @@ export default function Page() {
               testID={"enterTopic" + i}
               onPress={() => {
                 dispatch(setManagingTopic(topic));
-                router.push("/customTopic");
+                router.push("/custom/editCustomTopic");
               }}
             />
           </ListItem>

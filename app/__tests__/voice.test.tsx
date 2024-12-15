@@ -19,7 +19,7 @@ describe("<Voice />", () => {
     });
 
     await user.press(screen.getByTestId("numbers"));
-    expect(screen).toHavePathname("/recordNumbers");
+    expect(screen).toHavePathname("/numbers/recordNumbers");
   });
   it("can navigate to recordLetters", async () => {
     const user = userEvent.setup();
@@ -33,7 +33,7 @@ describe("<Voice />", () => {
     });
 
     await user.press(screen.getByTestId("letters"));
-    expect(screen).toHavePathname("/recordLetters");
+    expect(screen).toHavePathname("/letters/recordLetters");
   });
   it("can navigate to custom topics", async () => {
     const user = userEvent.setup();
@@ -47,6 +47,6 @@ describe("<Voice />", () => {
     });
 
     await user.press(screen.getByTestId("custom"));
-    expect(screen).toHavePathname("/recordCustomTopics");
+    expect(screen).toHavePathname("/custom/recordCustomTopics");
   });
 });

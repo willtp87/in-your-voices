@@ -44,6 +44,6 @@ describe("<Config />", () => {
     });
 
     await user.press(screen.getByTestId("customTopics"));
-    expect(screen).toHavePathname("/customTopics");
+    expect(screen).toHavePathname("/custom/editCustomTopics");
   });
 });

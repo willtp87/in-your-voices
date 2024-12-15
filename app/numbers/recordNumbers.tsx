@@ -1,18 +1,18 @@
 import { useNavigation } from "expo-router";
 import React, { useEffect } from "react";
-import "../i18n/i18n";
+import "../../i18n/i18n";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Recorder from "../components/Recorder";
-import { useAppSelector } from "../store/hooks";
+import Recorder from "../../components/Recorder";
+import { useAppSelector } from "../../store/hooks";
 import {
   selectMax,
   selectDir,
   selectRecordingsType,
-} from "../store/numbersSlice";
-import { voice } from "../store/voices";
-import { selectManagingVoice } from "../store/voicesSlice";
+} from "../../store/numbersSlice";
+import { voice } from "../../store/voices";
+import { selectManagingVoice } from "../../store/voicesSlice";
 
 // Screen to record numbers.
 export default function Page() {

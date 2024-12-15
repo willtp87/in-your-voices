@@ -2,9 +2,9 @@ import { render, screen, act } from "@testing-library/react-native";
 import React from "react";
 import { Provider } from "react-redux";
 
-import { store } from "../../store";
-import { createVoice } from "../../store/voices";
-import { setManagingVoice } from "../../store/voicesSlice";
+import { store } from "../../../store";
+import { createVoice } from "../../../store/voices";
+import { setManagingVoice } from "../../../store/voicesSlice";
 import RecordLetters from "../recordLetters";
 
 describe("<RecordLetters />", () => {
