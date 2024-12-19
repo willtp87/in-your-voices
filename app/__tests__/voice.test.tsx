@@ -49,6 +49,20 @@ describe("<Voice />", () => {
     await user.press(screen.getByTestId("colours"));
     expect(screen).toHavePathname("/colours/recordColours");
   });
+  it("can navigate to recordShapes", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Voice />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("shapes"));
+    expect(screen).toHavePathname("/shapes/recordShapes");
+  });
   it("can navigate to custom topics", async () => {
     const user = userEvent.setup();
 

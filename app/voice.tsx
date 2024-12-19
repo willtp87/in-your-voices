@@ -43,6 +43,11 @@ export default function Page() {
         title={t("coloursTitle")}
         onPress={() => router.push("/colours/recordColours")}
       />
+      <Button
+        testID="shapes"
+        title={t("shapesTitle")}
+        onPress={() => router.push("/shapes/recordShapes")}
+      />
     </SafeAreaView>
   );
 }

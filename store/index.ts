@@ -12,6 +12,7 @@ import {
   REGISTER,
 } from "redux-persist";
 
+import shapesReducer from "./shapesSlice";
 import coloursReducer from "./coloursSlice";
 import customTopicsReducer from "./customTopicsSlice";
 import lettersReducer from "./lettersSlice";
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   numbers: numbersReducer,
   letters: lettersReducer,
   colours: coloursReducer,
+  shapes: shapesReducer,
   voices: voicesReducer,
   customTopics: customTopicsReducer,
 });

@@ -8,6 +8,7 @@ An IOS app that helps you teach your child with your voices with custom and buil
 * [Numbers](./docs/numbers.md)
 * [Letters](./docs/letters.md)
 * [Colours](./docs/colours.md)
+* [Shapes](./docs/shapes.md)
 * [Custom Topics](./docs/playCustomTopics.md)
 * [Configuration](./docs/config.md)
   * [Voices](./docs/voices.md)

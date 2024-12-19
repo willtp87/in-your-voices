@@ -18,6 +18,7 @@ export interface voice {
   numberRecordings: recordingsInterface[];
   letterRecordings: recordingsInterface[];
   colourRecordings: recordingsInterface[];
+  shapeRecordings: recordingsInterface[];
 }
 
 // Directory constants.
@@ -25,6 +26,7 @@ export const voicesDir = FileSystem.documentDirectory + "voices/";
 export const numbersDir = "numbers/";
 export const lettersDir = "letters/";
 export const coloursDir = "colours/";
+export const shapesDir = "shapes/";
 
 // Get voices.
 export const getVoices = createAsyncThunk("getVoices", async () => {
@@ -41,6 +43,7 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
           numberRecordings: [],
           letterRecordings: [],
           colourRecordings: [],
+          shapeRecordings: [],
         };
         try {
           voiceVals = JSON.parse(
@@ -84,6 +87,7 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
   await forceCreateDir(voiceDir + "/" + numbersDir);
   await forceCreateDir(voiceDir + "/" + lettersDir);
   await forceCreateDir(voiceDir + "/" + coloursDir);
+  await forceCreateDir(voiceDir + "/" + shapesDir);
 
   const voice = {
     dir: voiceDir,
@@ -92,6 +96,7 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
     numberRecordings: [],
     letterRecordings: [],
     colourRecordings: [],
+    shapeRecordings: [],
   };
   writeVoiceJson(voice);
 

@@ -63,6 +63,20 @@ describe("<Index />", () => {
     await user.press(screen.getByTestId("colours"));
     expect(screen).toHavePathname("/colours/colours");
   });
+  it("can navigate to shapes", async () => {
+    const user = userEvent.setup();
+
+    renderRouter({
+      index: () => (
+        <Provider store={store}>
+          <Index />
+        </Provider>
+      ),
+    });
+
+    await user.press(screen.getByTestId("shapes"));
+    expect(screen).toHavePathname("/shapes/shapes");
+  });
   it("can navigate to custom topics", async () => {
     const user = userEvent.setup();
 
