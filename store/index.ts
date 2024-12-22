@@ -12,15 +12,14 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import shapesReducer from "./shapesSlice";
 import coloursReducer from "./coloursSlice";
 import customTopicsReducer from "./customTopicsSlice";
 import lettersReducer from "./lettersSlice";
 import numbersReducer from "./numbersSlice";
 import settingsReducer from "./settingsSlice";
+import shapesReducer from "./shapesSlice";
 import timeInAppReducer from "./timeInAppSlice";
 import voicesReducer from "./voicesSlice";
-AsyncStorage.clear();
 
 // Only persist the `settings` slice.
 const persistConfig = {
