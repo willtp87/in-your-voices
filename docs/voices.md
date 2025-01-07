@@ -11,3 +11,5 @@ You can:
 * Delete Voices
   * There is a confirmation modal.
 * Navigate to the [voice](./voice.md) screen to make recordings.
+
+![Voices](./images/voices.png "Voices")

@@ -14,6 +14,8 @@ An IOS app that helps you teach your child with your voices with custom and buil
   * [Voices](./docs/voices.md)
   * [Create Custom Topics](./docs/createCustomTopics.md)
 
+![Main](./docs/images/main.png "Main")
+
 ### Data Export
 
 The data stored in this app may be of great sentimental value. It can be exported by accessing the files through normal means:

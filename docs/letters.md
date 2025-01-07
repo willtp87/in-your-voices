@@ -6,3 +6,5 @@ For each letter it shows:
 * that lower case symbol
 * the upper case symbol
 * the spelling of the letter
+
+![Letters](./images/letter.png "Letters")
