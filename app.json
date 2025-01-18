@@ -21,6 +21,7 @@
       "supportsTablet": true,
       "infoPlist": {
         "UIFileSharingEnabled": true,
+        "ITSAppUsesNonExemptEncryption": false,
         "LSSupportsOpeningDocumentsInPlace": true
       },
       "entitlements": {
