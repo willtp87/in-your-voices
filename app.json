@@ -23,6 +23,9 @@
         "UIFileSharingEnabled": true,
         "LSSupportsOpeningDocumentsInPlace": true
       },
+      "entitlements": {
+        "aps-environment": "development"
+      },
       "bundleIdentifier": "com.willtp87.inyourvoices"
     },
     "plugins": [
