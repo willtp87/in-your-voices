@@ -21,7 +21,11 @@
       "supportsTablet": true,
       "infoPlist": {
         "UIFileSharingEnabled": true,
+        "ITSAppUsesNonExemptEncryption": false,
         "LSSupportsOpeningDocumentsInPlace": true
+      },
+      "entitlements": {
+        "aps-environment": "development"
       },
       "bundleIdentifier": "com.willtp87.inyourvoices"
     },

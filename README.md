@@ -1,6 +1,6 @@
 # In Your Voices
 
-An IOS app that helps you teach your child with your voices with custom and built in flash cards.
+An IOS app that helps you teach your child with your voices using custom and built in flash cards.
 [Documentation](https://willtp87.github.io/in-your-voices/)
 
 ## App Docs
@@ -77,6 +77,10 @@ This project uses Jest and has associated scripts.
 * package.json
 * github workflows
 * vscode tasks
+
+## Privacy
+
+* [Policy](./docs/privacyPolicy.md)
 
 ## License
 
