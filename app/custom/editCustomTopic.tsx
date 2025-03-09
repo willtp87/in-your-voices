@@ -86,7 +86,7 @@ export default function Page() {
                       const imgTarget = `${managingTopic?.dir}/${card?.machineName}.${result.assets[0].uri?.split(".").pop()}`;
                       await FileSystem.copyAsync({
                         from: result.assets[0].uri,
-                        to: imgTarget,
+                        to: FileSystem.documentDirectory + imgTarget,
                       });
                       if (managingTopic)
                         dispatch(
@@ -222,7 +222,9 @@ export default function Page() {
           {managingCard?.image && (
             <Image
               style={[{ width: 150, height: 150 }, { resizeMode: "contain" }]}
-              source={{ uri: managingCard?.image }}
+              source={{
+                uri: FileSystem.documentDirectory + managingCard?.image,
+              }}
             />
           )}
           <Dialog.Actions>

@@ -1,4 +1,5 @@
 import { Text } from "@rneui/themed";
+import * as FileSystem from "expo-file-system";
 import { useNavigation } from "expo-router";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -40,7 +41,7 @@ export default function Page() {
           {card.image && (
             <Image
               style={[{ width: "100%", flex: 1 }, { resizeMode: "contain" }]}
-              source={{ uri: card?.image }}
+              source={{ uri: FileSystem.documentDirectory + card?.image }}
             />
           )}
           {card.desc && <Text h2>{`${card.desc}`}</Text>}

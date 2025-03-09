@@ -22,7 +22,8 @@ export interface voice {
 }
 
 // Directory constants.
-export const voicesDir = FileSystem.documentDirectory + "voices/";
+export const voicesDirBaseName = "voices/";
+export const voicesDir = FileSystem.documentDirectory + voicesDirBaseName;
 export const numbersDir = "numbers/";
 export const lettersDir = "letters/";
 export const coloursDir = "colours/";
@@ -37,7 +38,7 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
     voices = await Promise.all(
       voiceDirs.map(async (voiceDir) => {
         let voiceVals: voice = {
-          dir: voicesDir + voiceDir,
+          dir: voicesDirBaseName + voiceDir,
           title: null,
           desc: null,
           numberRecordings: [],
@@ -64,7 +65,7 @@ export const getVoices = createAsyncThunk("getVoices", async () => {
 // Write a voice JSON file.
 const writeVoiceJson = async (voiceIn: voice) => {
   return await FileSystem.writeAsStringAsync(
-    voiceIn.dir + voiceJsonBasename,
+    FileSystem.documentDirectory + voiceIn.dir + voiceJsonBasename,
     JSON.stringify(voiceIn),
   );
 };
@@ -74,14 +75,13 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
   await forceCreateDir(voicesDir);
 
   const voiceDirs = await FileSystem.readDirectoryAsync(voicesDir);
-  const voiceDir =
-    voicesDir +
-    (voiceDirs
-      ? voiceDirs.reduce((acc: number, value: string) => {
-          return (acc =
-            acc > parseInt(value, 10) ? acc : parseInt(value, 10) + 1);
-        }, 1)
-      : 1);
+  const voiceDirBaseName = voiceDirs
+    ? voiceDirs.reduce((acc: number, value: string) => {
+        return (acc =
+          acc > parseInt(value, 10) ? acc : parseInt(value, 10) + 1);
+      }, 1)
+    : 1;
+  const voiceDir = voicesDir + voiceDirBaseName;
 
   await forceCreateDir(voiceDir);
   await forceCreateDir(voiceDir + "/" + numbersDir);
@@ -90,7 +90,7 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
   await forceCreateDir(voiceDir + "/" + shapesDir);
 
   const voice = {
-    dir: voiceDir,
+    dir: voicesDirBaseName + voiceDirBaseName,
     title: null,
     desc: null,
     numberRecordings: [],
@@ -107,7 +107,7 @@ export const createVoice = createAsyncThunk("createVoice", async () => {
 export const deleteVoice = createAsyncThunk(
   "deleteVoice",
   async (dir: string) => {
-    await FileSystem.deleteAsync(dir, { idempotent: true });
+    await FileSystem.deleteAsync(FileSystem.documentDirectory + dir, { idempotent: true });
     return { dir };
   },
 );

@@ -26,7 +26,9 @@ export interface customTopic {
 }
 
 // Directory constants.
-export const customTopicsDir = FileSystem.documentDirectory + "customTopics/";
+export const customTopicsDirBaseName = "customTopics/";
+export const customTopicsDir =
+  FileSystem.documentDirectory + customTopicsDirBaseName;
 
 // Get customTopics.
 export const getTopics = createAsyncThunk("getCustomTopics", async () => {
@@ -37,7 +39,7 @@ export const getTopics = createAsyncThunk("getCustomTopics", async () => {
     topics = await Promise.all(
       topicDirs.map(async (topicDir) => {
         let topicVals: customTopic = {
-          dir: customTopicsDir + topicDir,
+          dir: customTopicsDirBaseName + topicDir,
           recordingsType: "",
           title: null,
           desc: null,
@@ -63,7 +65,7 @@ export const getTopics = createAsyncThunk("getCustomTopics", async () => {
 // Write a topic JSON file.
 const writeTopicJson = async (topicIn: customTopic) => {
   return await FileSystem.writeAsStringAsync(
-    topicIn.dir + customTopicsJsonBasename,
+    FileSystem.documentDirectory + topicIn.dir + customTopicsJsonBasename,
     JSON.stringify(topicIn),
   );
 };
@@ -79,19 +81,19 @@ export const createTopic = createAsyncThunk("createTopic", async () => {
           acc > parseInt(value, 10) ? acc : parseInt(value, 10) + 1);
       }, 1)
     : 1;
-  const topicDir = customTopicsDir + topicBaseName;
 
+  const topicDir = customTopicsDir + topicBaseName;
   await forceCreateDir(topicDir);
 
   const topic = {
-    dir: topicDir,
+    dir: customTopicsDirBaseName + `${topicBaseName}`,
     recordingsType: `${topicBaseName}`,
     title: null,
     desc: null,
     cards: [],
     cardsOverTime: 0,
   };
-  writeTopicJson(topic);
+  await writeTopicJson(topic);
 
   return topic;
 });
@@ -100,7 +102,7 @@ export const createTopic = createAsyncThunk("createTopic", async () => {
 export const deleteTopic = createAsyncThunk(
   "deleteTopic",
   async (dir: string) => {
-    await FileSystem.deleteAsync(dir, { idempotent: true });
+    await FileSystem.deleteAsync(FileSystem.documentDirectory + dir, { idempotent: true });
     return { dir };
   },
 );

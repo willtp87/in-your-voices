@@ -6,7 +6,9 @@ import * as FileSystem from "expo-file-system";
 // Play a sound.
 export const play = async (audioFile: string) => {
   try {
-    const { sound } = await Audio.Sound.createAsync({ uri: audioFile });
+    const { sound } = await Audio.Sound.createAsync({
+      uri: FileSystem.documentDirectory + audioFile,
+    });
     await sound.playAsync();
     sound.setOnPlaybackStatusUpdate(async (playbackStatus) => {
       if (playbackStatus.isLoaded && playbackStatus.didJustFinish)
@@ -30,7 +32,7 @@ export const stopRecording = async (
     const recordingUri = recording.getURI() ?? "";
     await FileSystem.moveAsync({
       from: recordingUri,
-      to: targetUri,
+      to: FileSystem.documentDirectory + targetUri,
     });
   } catch (err) {
     console.error("Failed to stop/save recording", err);

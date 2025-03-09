@@ -1,5 +1,6 @@
 import { Text, ListItem, Icon } from "@rneui/themed";
 import { Audio } from "expo-av";
+import * as FileSystem from "expo-file-system";
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
 
@@ -61,7 +62,10 @@ export default function Recorder({
                 if (managingVoice && recording) {
                   const recordingUri = `${managingVoice.dir}/${recordingsDir}${i}.${recording.getURI()?.split(".").pop()}`;
                   // Ensure recordings dir exists.
-                  await forceCreateDir(`${managingVoice.dir}/${recordingsDir}`);
+                  await forceCreateDir(
+                    FileSystem.documentDirectory +
+                      `${managingVoice.dir}/${recordingsDir}`,
+                  );
                   stopRecording(recording, recordingUri);
 
                   recordingVal.recording = recordingUri;
