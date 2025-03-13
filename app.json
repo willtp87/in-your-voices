@@ -7,7 +7,7 @@
       "ios"
     ],
     "newArchEnabled": true,
-    "version": "1.0.2",
+    "version": "1.0.3",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -32,7 +32,11 @@
     "plugins": [
       "expo-router",
       "expo-image-picker",
-      "expo-localization"
+      "expo-localization",
+      ["expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone for the purposes of making recordings for playback with the flash cards."
+        }]
     ],
     "extra": {
       "router": {
