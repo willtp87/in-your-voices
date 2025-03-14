@@ -2,7 +2,7 @@ import { Switch, Text, Button } from "@rneui/themed";
 import { useNavigation, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, Linking } from "react-native";
+import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppSelector, useAppDispatch } from "../store/hooks";
@@ -65,13 +65,7 @@ export default function Page() {
           title={t("customTopicsTitle")}
           onPress={() => router.push("/custom/editCustomTopics")}
         />
-        <Button
-          testID="docs"
-          title={t("docs")}
-          onPress={() =>
-            Linking.openURL("https://willtp87.github.io/in-your-voices/")
-          }
-        />
+        <Text>{t("help")}</Text>
       </ScrollView>
     </SafeAreaView>
   );
