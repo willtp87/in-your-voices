@@ -65,12 +65,12 @@ export default function Player({
   useEffect(() => {
     if (init) {
       setInit(false);
+      // Shuffle
+      if (settings.shuffle) shuffleArray(playlist);
       // Play.
       if (activeVoice && position === 0 && 0 in playlist) {
         if (playlist[position].recording) play(playlist[position].recording);
       }
-      // Shuffle
-      if (settings.shuffle) shuffleArray(playlist);
     }
   }, [position, activeVoice, init, playlist, settings]);
 
